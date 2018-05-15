@@ -16,7 +16,7 @@ In addition to the required Julia packages, it is required that you have [BLAST]
 
 The package must be downloaded from GitHub
 
-* Git: `git clone https://github.com/bcbi/CAOS`
+* Git: `git clone https://github.com/bcbi/CAOS.jl`
 
 ## Project Status
 
