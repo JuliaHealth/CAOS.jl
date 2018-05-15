@@ -51,7 +51,7 @@ generate_caos_rules(tree_file_path::String, output_directory::String)
 classify_new_sequence(tree::Node, character_labels::Dict{String,String}, taxa_labels::Dict{String,String}, sequence_file_path::String, output_directory::String ; all_CA_weights::Dict{Int64,Dict{String,Int64}}=Dict(1=>Dict("sPu"=>1,"sPr"=>1,"cPu"=>1,"cPr"=>1)), occurrence_weighting::Bool=false, tiebreaker::Vector{Dict{String,Int64}}=[Dict{String,Int64}()])
 ```
 
-* `tree` : A node object containing the tree with all CAOS rules
+* `tree` : A Node object containing the tree with all CAOS rules
 
 * `character_labels` : A dictionary containing the character labels with the associated sequences
 
