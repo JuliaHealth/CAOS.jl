@@ -76,7 +76,7 @@ function classify_new_sequence(tree::Node, character_labels::Dict{String,String}
 
     classification = classify_sequence(new_seq, tree, all_CA_weights[1], all_CA_weights, occurrence_weighting, 1, tiebreaker, blast_results=blast_results, combo_classification=combo_classification)
 
-    write("$output_directory/classification_result.txt", "$classification")
+    return classification
 
 end
 
