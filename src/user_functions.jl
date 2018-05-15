@@ -1,5 +1,23 @@
+using Bio.Tools.BLAST
+using Bio.Seq
+using JSON
+using FastaIO
+using Tokenize
+
+include("caos_functions.jl")
+include("tree_functions.jl")
+include("utils.jl")
+include("classification.jl")
+include("gap_imputation.jl")
+
 # Only for simple rules
 function generate_caos_rules(tree_file_path::String, output_directory::String)
+
+    # Create directory
+    try
+        mkdir("$output_directory")
+    catch
+    end
 
     # Parse the tree and prepare data for CA's
     nodes, taxa_labels, character_labels, _ = parse_tree(tree_file_path)
@@ -44,6 +62,12 @@ function generate_caos_rules(tree_file_path::String, output_directory::String)
 end
 
 function classify_new_sequence(tree::Node, character_labels::Dict{String,String}, taxa_labels::Dict{String,String}, sequence_file_path::String, output_directory::String ; all_CA_weights::Dict{Int64,Dict{String,Int64}}=Dict(1=>Dict("sPu"=>1,"sPr"=>1,"cPu"=>1,"cPr"=>1)), occurrence_weighting::Bool=false, tiebreaker::Vector{Dict{String,Int64}}=[Dict{String,Int64}()], combo_classification::Bool=false)
+
+    # Create directory
+    try
+        mkdir("$output_directory")
+    catch
+    end
 
     character_labels_no_gaps = remove_blanks(character_labels)
 
