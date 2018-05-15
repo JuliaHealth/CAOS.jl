@@ -31,9 +31,9 @@ Contributions are very welcome, as are feature requests and suggestions. Please 
 
 ## Documentation
 
-The two functions provided by this package are located in the `user_functions.jl` file. This file also leverages helper functions from the files: `caos_functions.jl`, `tree_functions.jl` ,` utils.jl`, `classification.jl`, `gap_imputation.jl`.
+The three functions provided by this package are located in the `user_functions.jl` file. This file also leverages helper functions from the files: `caos_functions.jl`, `tree_functions.jl` ,` utils.jl`, `classification.jl`, `gap_imputation.jl`.
 
-To use this package to classify a sequence, first run the `generate_caos_rules` function on your tree in the required NEXUS format. This will create the necessary CAOS rules and files to use for classification. Once you have generated CAOS rules, run the `classify_new_sequence` function on the sequence you wish to classify. The resulting classification will be written to file in your defined output directory.
+To use this package to classify a sequence, first run the `generate_caos_rules` function on your tree in the required NEXUS format. This will create the necessary CAOS rules and files to use for classification. If you don't have the output from `generate_caos_rules` in your working environment, run `load_tree` to read in the necessary tree files. Next run the `classify_new_sequence` function on the sequence you wish to classify.
 
 #### Generate CAOS rules from a phylogenetic tree, writes CAOS rule files to the output directory.
 ```julia
