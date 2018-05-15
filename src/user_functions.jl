@@ -1,15 +1,3 @@
-using Bio.Tools.BLAST
-using Bio.Seq
-using JSON
-using FastaIO
-using Tokenize
-
-include("caos_functions.jl")
-include("tree_functions.jl")
-include("utils.jl")
-include("classification.jl")
-include("gap_imputation.jl")
-
 # Only for simple rules
 function generate_caos_rules(tree_file_path::String, output_directory::String)
 
@@ -95,5 +83,3 @@ function load_tree(directory::String)
     return tree, character_labels, taxa_labels
 
 end
-
-tree, character_labels, taxa_labels = load_tree("...")
