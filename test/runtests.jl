@@ -8,6 +8,6 @@ tree, character_labels, taxa_labels = generate_caos_rules("/data/S10593.nex", "/
 
 # @test typeof(classification) == String
 
-# tree2, character_labels2, taxa_labels2 = load_tree("/data/output")
+tree2, character_labels2, taxa_labels2 = load_tree("/data/output")
 
-# @test typeof(tree2) == Node
+@test typeof(tree2) == Node
