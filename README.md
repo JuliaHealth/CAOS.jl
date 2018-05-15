@@ -2,11 +2,11 @@
 
 *Package for using the CAOS algorithm in Julia*
 
-[![Build Status](https://travis-ci.org/paulstey/CAOS.jl.svg?branch=master)](https://travis-ci.org/paulstey/CAOS.jl)
+[![Build Status](https://travis-ci.org/bcbi/CAOS.jl.svg?branch=master)](https://travis-ci.org/bcbi/CAOS.jl)
 
-[![Coverage Status](https://coveralls.io/repos/paulstey/CAOS.jl/badge.svg?branch=master&service=github)](https://coveralls.io/github/paulstey/CAOS.jl?branch=master)
+[![Coverage Status](https://coveralls.io/repos/bcbi/CAOS.jl/badge.svg?branch=master&service=github)](https://coveralls.io/github/bcbi/CAOS.jl?branch=master)
 
-[![codecov.io](http://codecov.io/github/paulstey/CAOS.jl/coverage.svg?branch=master)](http://codecov.io/github/paulstey/CAOS.jl?branch=master)
+[![codecov.io](http://codecov.io/github/bci/CAOS.jl/coverage.svg?branch=master)](http://codecov.io/github/bcbi/CAOS.jl?branch=master)
 
 ## Installation
 
