@@ -72,7 +72,7 @@ classify_new_sequence(tree::Node, character_labels::Dict{String,String}, taxa_la
 
 * This functions returns the classification result. Either a string with the classification label or a Node object (under classifiction) will be returned.
 
-#### # Function to read tree information from file
+#### Function to read tree information from file
 ```julia
 load_tree(directory::String)
 ```
