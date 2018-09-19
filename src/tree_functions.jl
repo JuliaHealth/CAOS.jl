@@ -74,7 +74,7 @@ function get_nodes(tree::String ; taxa_to_remove::Any=false)
     # Initialize variables
     num_nodes = 1
     curr_node = 1
-    nodes = Array{Dict{String,Any}}(0)
+    nodes = Array{Dict{String,Any}}(undef, 0)
 
     # Split tree string into tokens
     tree_tokens = [untokenize(token) for token in collect(tokenize(tree))]
@@ -89,7 +89,7 @@ function get_nodes(tree::String ; taxa_to_remove::Any=false)
 
         # Start of a new node
         if char == "("
-            push!(nodes, Dict{String,Any}("Groups" => 0, "Taxa" => Array{String}(0), "Descendents" => Array{Int}(0)))
+            push!(nodes, Dict{String,Any}("Groups" => 0, "Taxa" => Array{String}(undef, 0), "Descendents" => Array{Int}(undef, 0)))
             paren = 1
 
             # Iterate through the rest of the tree tokens
@@ -140,14 +140,14 @@ function parse_tree(file_path::String ; taxa_to_remove::Any=false)
     labels = false
     character_counter = 3
     file = open(file_path)
-    nodes = Array{Dict{String,Any}}(0)
+    nodes = Array{Dict{String,Any}}(undef, 0)
     title_count = 0
     name = "NoName"
 
     # Iterate through each line of the file
     for line in eachline(file)
 
-        if contains(line, "TITLE ")
+        if occursin("TITLE ", line)
             title_count += 1
             if title_count == 2
                 name = untokenize(collect(tokenize(line))[4])
@@ -155,14 +155,14 @@ function parse_tree(file_path::String ; taxa_to_remove::Any=false)
         end
 
         # Get nodes for the tree
-        if contains(line, "TREE ") && contains(line, "=")
+        if occursin("TREE ", line) && occursin("=", line)
             nodes = get_nodes(line,taxa_to_remove=taxa_to_remove)
             break
         end
 
         # Match the character sequences with their labels
         if character_counter == 2
-            idxs = Array{Int}(0)
+            idxs = Array{Int}(undef, 0)
             for (idx, char) in enumerate(line)
                 if char == ' '
                     push!(idxs, idx)
@@ -182,7 +182,7 @@ function parse_tree(file_path::String ; taxa_to_remove::Any=false)
         # Match the taxa with their labels
         if labels
             label_tokens = collect(tokenize(line))
-            temp_labels = Array{String}(0)
+            temp_labels = Array{String}(undef, 0)
             for token in label_tokens
                 if token.kind != collect(tokenize(" "))[1].kind
                     push!(temp_labels, untokenize(token))
@@ -192,13 +192,13 @@ function parse_tree(file_path::String ; taxa_to_remove::Any=false)
                 end
             end
             taxa_labels[temp_labels[1]] = temp_labels[2]
-            if contains(line, ";")
+            if occursin(";", line)
                 labels = false
             end
         end
 
         # Differentiate lines
-        if contains(line, "TRANSLATE")
+        if occursin("TRANSLATE", line)
             labels = true
         end
         if line == "MATRIX"

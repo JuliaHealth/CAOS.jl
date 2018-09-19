@@ -9,7 +9,7 @@ function convert_to_struct(tree_dict::Dict{String,Any}, tree_obj::Node)
 
         # Add the CA's for the child
         for CA in child["CAs"]
-            push!(tree_obj.children[child_idx].CAs, Rule((CA["idxs"]...), ([ca[1] for ca in CA["char_attr"]]...), CA["is_pure"], CA["num_group"], CA["num_non_group"], CA["occurances"]))
+            push!(tree_obj.children[child_idx].CAs, Rule((CA["idxs"]...,), ([ca[1] for ca in CA["char_attr"]]...,), CA["is_pure"], CA["num_group"], CA["num_non_group"], CA["occurances"]))
         end
 
         # Iterate through all of the child's descendents
@@ -20,7 +20,7 @@ function convert_to_struct(tree_dict::Dict{String,Any}, tree_obj::Node)
 
             # Add the CA's for the child's descendent
             for CA in descendent["CAs"]
-                push!(tree_obj.children[child_idx].children[desc_idx].CAs, Rule((CA["idxs"]...), ([ca[1] for ca in CA["char_attr"]]...), CA["is_pure"], CA["num_group"], CA["num_non_group"], CA["occurances"]))
+                push!(tree_obj.children[child_idx].children[desc_idx].CAs, Rule((CA["idxs"]...,), ([ca[1] for ca in CA["char_attr"]]...,), CA["is_pure"], CA["num_group"], CA["num_non_group"], CA["occurances"]))
             end
 
             # Recur on the child's descendent to add the next layer to the tree
@@ -155,7 +155,7 @@ function add_blanks_to_front(subject::String, query::String, new_seq::String, su
 end
 
 # Function to get the hit from blastn that has the most sequence coverage with no gaps compared to the query sequence
-function get_best_hit(results::Array{Bio.Tools.BLAST.BLASTResult,1}, query::String, character_labels::Dict{String,String},  character_labels_no_gaps::Dict{String,String})
+function get_best_hit(results::Array{BioTools.BLAST.BLASTResult,1}, query::String, character_labels::Dict{String,String},  character_labels_no_gaps::Dict{String,String})
 
     # Initialize varibales
     error = Array{Int,1}()

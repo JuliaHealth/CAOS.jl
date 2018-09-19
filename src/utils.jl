@@ -3,9 +3,9 @@ function remove_blanks(char_label_dict::Dict{String,String} ; change_to_N::Bool=
     character_labels_no_blanks = Dict{String,String}()
     for (key,value) in char_label_dict
         if change_to_N
-            character_labels_no_blanks[key] = replace(value, "-", "N")
+            character_labels_no_blanks[key] = replace(value, "-" => "N")
         else
-            character_labels_no_blanks[key] = replace(value, "-", "")
+            character_labels_no_blanks[key] = replace(value, "-" => "")
         end
     end
     return character_labels_no_blanks

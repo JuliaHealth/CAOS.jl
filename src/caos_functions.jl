@@ -2,8 +2,8 @@
 function get_group_taxa_at_node(nodes::Array{Dict{String,Any}}, node_num::Int64)
 
     #Initialize varibales
-    last_group = Array{String}(0)
-    groups = Array{Array{String}}(0)
+    last_group = Array{String}(undef, 0)
+    groups = Array{Array{String}}(undef, 0)
     num_groups = nodes[node_num]["Groups"]
 
     # Iterate through each descendent
@@ -31,9 +31,9 @@ end
 
 # Function to get all the combinations of group vs non groups
 function get_group_combos(group_taxa::Array{Array{String}})
-    combos = Array{Dict{String,Array{String}}}(0)
+    combos = Array{Dict{String,Array{String}}}(undef, 0)
     for (idx, group) in enumerate(group_taxa)
-        non_group = Array{String}(0)
+        non_group = Array{String}(undef, 0)
         group = group
         non_group_groups = group_taxa[1:end .!= idx]
         for non_group_group in non_group_groups
@@ -50,8 +50,8 @@ function get_sPu_and_sPr(nodes::Array{Dict{String,Any}}, node_num::Int64, taxa_l
     # Initialize variables
     group_taxa = get_group_taxa_at_node(nodes, node_num)
     group_combos = get_group_combos(group_taxa)
-    sPu = Array{Dict{String,Any}}(0)
-    sPr = Array{Dict{String,Any}}(0)
+    sPu = Array{Dict{String,Any}}(undef, 0)
+    sPr = Array{Dict{String,Any}}(undef, 0)
     letter_transformations = Dict{Char,Vector{Char}}('A'=>['A'], 'T'=>['T'], 'C'=>['C'], 'G'=>['G'], 'U'=>['U'], 'R'=>['A','G'], 'Y'=>['C','T'], 'S'=>['G','C'], 'W'=>['A','T'], 'K'=>['G','T'], 'M'=>['A','C'], 'B'=>['C','G','T'], 'D'=>['A','G','T'], 'H'=>['A','C','T'], 'V'=>['A','C','G'], 'N'=>['A','T','C','G'], '-'=>['-'])
 
     # Iterate through all possible group combinations
@@ -119,7 +119,7 @@ function get_sPu_and_sPr(nodes::Array{Dict{String,Any}}, node_num::Int64, taxa_l
                                         sPu[group_idx]["sPu"][idx] = (letter, occurances)
                                     else
                                         if !haskey(sPr[group_idx]["sPr"], idx)
-                                            sPr[group_idx]["sPr"][idx] = Array{Tuple{Char,Int}}(0)
+                                            sPr[group_idx]["sPr"][idx] = Array{Tuple{Char,Int}}(undef, 0)
                                         end
                                         push!(sPr[group_idx]["sPr"][idx], (letter, occurances))
                                     end

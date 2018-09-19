@@ -1,0 +1,13 @@
+name = "CAOS"
+uuid = "10477bc4-4268-52f7-a82a-c551066970c8"
+authors = ["BCBI <email>"]
+version = "0.0.1"
+
+[deps]
+BioAlignments = "00701ae9-d1dc-5365-b64a-a3a3ebf5695e"
+BioSequences = "7e6ae17a-c86d-528c-b3b9-7f778a29fe59"
+BioTools = "6631239a-b2a9-11e8-0104-a58b323c83c6"
+FastaIO = "a0c94c4b-ebed-5953-b5fc-82fe598ac79f"
+JSON = "682c06a0-de6a-54ab-a142-c8b1cf79cde6"
+Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
+Tokenize = "0796e94c-ce3b-5d07-9a54-7f471281c624"
