@@ -6,7 +6,11 @@ using JSON
 using FastaIO
 using Tokenize
 
-export generate_caos_rules, classify_new_sequence, load_tree
+export generate_caos_rules,
+       classify_new_sequence,
+       parse_tree,
+       load_tree,
+       get_nodes
 
 include("caos_functions.jl")
 include("tree_functions.jl")

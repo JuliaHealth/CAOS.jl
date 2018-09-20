@@ -20,7 +20,7 @@ struct Node
 end
 
 # Function to remove a specific taxa from a tree in Newick Format
-function remove_from_tree(tree_tokens::Vector{String}, taxa_to_remove::Any)
+function remove_from_tree(tree_tokens::Vector{String}, taxa_to_remove::Array{String,1})
 
     tokens_removed = 0
 
@@ -174,7 +174,7 @@ function parse_tree(file_path::String ; taxa_to_remove::Any=false)
                 character_counter = 2
             else
                 character_counter = 1
-                character_labels[line[1:idxs[1]-1]] = line[idxs[end]+1:end-2]
+                character_labels[line[1:idxs[1]-1]] = line[idxs[end]+1:end]
             end
         end
         character_counter += 1

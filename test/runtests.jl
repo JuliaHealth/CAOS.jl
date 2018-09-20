@@ -1,16 +1,22 @@
-using CAOS
-using Test
+module TestCAOS
 
-@testset "tree load" begin
-    tree, character_labels, taxa_labels = generate_caos_rules("data/S10593.nex", "data/output")
+    using CAOS
+    using Test
 
-    @test typeof(tree) == CAOS.Node
+    all_tests = [
+        ("tree_functions.jl",   "           Testing: Tree functions"),
+    #    ("plot_utils.jl",     "       Testing: Plot Utils")
+        ]
 
-    # classification = classify_new_sequence(tree, character_labels, taxa_labels, "/data/Example_Sequence.txt", "/data/output")
+    println("Running tests:")
 
-    # @test typeof(classification) == String
+    for (t, test_string) in all_tests
+        println("-----------------------------------------")
+        println("-----------------------------------------")
+        println(test_string)
+        println("-----------------------------------------")
+        println("-----------------------------------------")
+        include(t)
+    end
 
-    tree2, character_labels2, taxa_labels2 = load_tree("data/output")
-
-    @test typeof(tree2) == CAOS.Node
 end
