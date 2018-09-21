@@ -17,7 +17,7 @@ The package must be downloaded from GitHub
 
 ## Project Status
 
-The package is tested against the current Julia `0.6.1` release on OS X.
+The package is tested against the current Julia `0.7` and Julia `1.0` release on OS X, Linux, and Windows.
 
 ## Contributing and Questions
 
