@@ -1,3 +1,4 @@
+using Tokenize
 
 @testset "tree load" begin
     tree = parse_tree("data/S10593.nex")
@@ -20,6 +21,16 @@
 
     @test title == "Tubificoides_ITS"
 
+
+    tree = parse_tree("data/S10593.nex", taxa_to_remove=["Tubificoides_imajimai_CE536", "Tubificoides_benedii_II_CE2692"])
+    @test length(tree) == 4
+
+    nodes, taxa_labels, character_labels, title = tree
+    @test !haskey(taxa_labels, "30")
+    @test !haskey(taxa_labels, "45")
+    @test !haskey(character_labels, "Tubificoides_imajimai_CE536")
+    @test !haskey(character_labels, "Tubificoides_benedii_II_CE2692")
+
     # tree, character_labels, taxa_labels = generate_caos_rules("data/S10593.nex", "data/output")
     #
     # @test typeof(tree) == CAOS.Node
@@ -33,7 +44,26 @@
     # @test typeof(tree2) == CAOS.Node
 end
 
-@testset "get nodes" begin
+@testset "remove_from_tree" begin
+    tree = "((1,2,3),((4,5),6)));"
+    tree_tokens = [untokenize(token) for token in collect(tokenize(tree))]
+    remove_from_tree!(tree_tokens,["1"])
+
+    @test !occursin("1", join(tree_tokens))
+
+    tree = "((apple,pinapple,pear),((tomatoe,pepper),potatoe)));"
+    tree_tokens = [untokenize(token) for token in collect(tokenize(tree))]
+    remove_from_tree!(tree_tokens,["pepper"])
+    @test join(tree_tokens) == "((apple,pinapple,pear),((tomatoe),potatoe)));"
+    @test !occursin("pepper", join(tree_tokens))
+
+    remove_from_tree!(tree_tokens,["pinapple", "pear"])
+    @test join(tree_tokens) == "((apple),((tomatoe),potatoe)));"
+    @test !occursin("pinapple", join(tree_tokens))
+    @test !occursin("pear", join(tree_tokens))
+end
+
+@testset "get_nodes" begin
     tree = "(1,((2,3),((4,5),6)));"
 
     nodes = get_nodes(tree)
@@ -76,4 +106,46 @@ end
     @test nodes[2]["Groups"] == 3
     @test nodes[3]["Groups"] == 2
     @test nodes[4]["Groups"] == 2
+
+
+    tree = "((1,2,3),((4,5),6)));"
+    nodes = get_nodes(tree, taxa_to_remove=["2"])
+
+    @test length(nodes) == 4
+    @test nodes[1]["Taxa"] == ["1", "3", "4", "5", "6"]
+    @test nodes[2]["Taxa"] == ["1", "3"]
+    @test nodes[3]["Taxa"] == ["4", "5", "6"]
+    @test nodes[4]["Taxa"] == ["4", "5"]
+
+    @test nodes[1]["Descendents"] == [2,3]
+    @test nodes[2]["Descendents"] == []
+    @test nodes[3]["Descendents"] == [4]
+    @test nodes[4]["Descendents"] == []
+
+    @test nodes[1]["Groups"] == 2
+    @test nodes[2]["Groups"] == 2
+    @test nodes[3]["Groups"] == 2
+    @test nodes[4]["Groups"] == 2
+
+
+    tree = "((1,2,3),((4,5),6)));"
+    nodes = get_nodes(tree, taxa_to_remove=["1", "2", "3"])
+
+    @test length(nodes) == 3
+    @test nodes[1]["Taxa"] == []
+    @test nodes[2]["Taxa"] == ["4", "5", "6"]
+    @test nodes[3]["Taxa"] == ["4", "5"]
+
+    @test nodes[1]["Descendents"] == []
+    @test nodes[2]["Descendents"] == [3]
+    @test nodes[3]["Descendents"] == []
+
+    @test nodes[1]["Groups"] == 1
+    @test nodes[2]["Groups"] == 2
+    @test nodes[3]["Groups"] == 2
+
+end
+
+@testset "add_nodes!" begin
+
 end

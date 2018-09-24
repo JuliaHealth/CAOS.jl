@@ -10,7 +10,8 @@ export generate_caos_rules,
        classify_new_sequence,
        parse_tree,
        load_tree,
-       get_nodes
+       get_nodes,
+       remove_from_tree!
 
 include("caos_functions.jl")
 include("tree_functions.jl")

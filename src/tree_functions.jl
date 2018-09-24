@@ -20,7 +20,7 @@ struct Node
 end
 
 # Function to remove a specific taxa from a tree in Newick Format
-function remove_from_tree(tree_tokens::Vector{String}, taxa_to_remove::Array{String,1})
+function remove_from_tree!(tree_tokens::Vector{String}, taxa_to_remove::Union{Array{String,1},Bool})
 
     tokens_removed = 0
 
@@ -69,7 +69,7 @@ function remove_from_tree(tree_tokens::Vector{String}, taxa_to_remove::Array{Str
 end
 
 # Function to produce nodes and relevant groups and taxa from a tree in newick form
-function get_nodes(tree::String ; taxa_to_remove::Any=false)
+function get_nodes(tree::String ; taxa_to_remove::Union{Array{String,1},Bool}=false)
 
     # Initialize variables
     num_nodes = 1
@@ -81,7 +81,7 @@ function get_nodes(tree::String ; taxa_to_remove::Any=false)
 
     # Remove taxa from tree if applicable
     if !(taxa_to_remove == false)
-        tree_tokens = remove_from_tree(tree_tokens, taxa_to_remove)
+        tree_tokens = remove_from_tree!(tree_tokens, taxa_to_remove)
     end
 
     # Iterate through each token
@@ -156,7 +156,7 @@ function parse_tree(file_path::String ; taxa_to_remove::Any=false)
 
         # Get nodes for the tree
         if occursin("TREE ", line) && occursin("=", line)
-            nodes = get_nodes(line,taxa_to_remove=taxa_to_remove)
+            nodes = get_nodes(line, taxa_to_remove=taxa_to_remove)
             break
         end
 
@@ -210,7 +210,7 @@ function parse_tree(file_path::String ; taxa_to_remove::Any=false)
 end
 
 # Function to get all the CA's from all the nodes of a tree into proper format
-function add_nodes(tree::Node,sPu::Array{Dict{String,Any}},sPr::Array{Dict{String,Any}},cPu::Array{Dict{String,Any}},cPr::Array{Dict{String,Any}},taxa_labels::Dict{String,String},character_labels::Dict{String,String},nodes::Array{Dict{String,Any}},node_num::Int64;complex::Bool=true)
+function add_nodes!(tree::Node,sPu::Array{Dict{String,Any}},sPr::Array{Dict{String,Any}},cPu::Array{Dict{String,Any}},cPr::Array{Dict{String,Any}},taxa_labels::Dict{String,String},character_labels::Dict{String,String},nodes::Array{Dict{String,Any}},node_num::Int64;complex::Bool=true)
 
     # Iterate through each group at a node
     for (group_idx, taxa) in enumerate(get_group_taxa_at_node(nodes, node_num))

@@ -5,7 +5,11 @@ module TestCAOS
 
     all_tests = [
         ("tree_functions.jl",   "           Testing: Tree functions"),
-    #    ("plot_utils.jl",     "       Testing: Plot Utils")
+    #    ("gap_imputation.jl",     "       Testing: Gap imputation"),
+    #    ("classification.jl",     "       Testing: Classification"),
+    #    ("user_functions.jl",     "       Testing: User functions"),
+    #    ("caos_functions.jl",     "       Testing: CAOS functions")
+
         ]
 
     println("Running tests:")
