@@ -26,6 +26,7 @@ using Tokenize
     @test length(tree) == 4
 
     nodes, taxa_labels, character_labels, title = tree
+    @test !(["30", "45"] in nodes[1]["Taxa"])
     @test !haskey(taxa_labels, "30")
     @test !haskey(taxa_labels, "45")
     @test !haskey(character_labels, "Tubificoides_imajimai_CE536")

@@ -132,7 +132,7 @@ function get_nodes(tree::String ; taxa_to_remove::Union{Array{String,1},Bool}=fa
 end
 
 # Function to parse a newick tree file into nodes and labels matching character sequences
-function parse_tree(file_path::String ; taxa_to_remove::Any=false)
+function parse_tree(file_path::String; taxa_to_remove::Union{Array{String,1},Bool}=false)
 
     # Initialize variables
     character_labels = Dict{String,String}()
@@ -156,7 +156,7 @@ function parse_tree(file_path::String ; taxa_to_remove::Any=false)
 
         # Get nodes for the tree
         if occursin("TREE ", line) && occursin("=", line)
-            nodes = get_nodes(line, taxa_to_remove=taxa_to_remove)
+            nodes = get_nodes(line, taxa_to_remove = taxa_to_remove)
             break
         end
 
@@ -174,7 +174,10 @@ function parse_tree(file_path::String ; taxa_to_remove::Any=false)
                 character_counter = 2
             else
                 character_counter = 1
-                character_labels[line[1:idxs[1]-1]] = line[idxs[end]+1:end]
+                taxon = line[1:idxs[1]-1]
+                if !(taxon in taxa_to_remove)
+                    character_labels[taxon] = line[idxs[end]+1:end]
+                end
             end
         end
         character_counter += 1
@@ -191,7 +194,9 @@ function parse_tree(file_path::String ; taxa_to_remove::Any=false)
                     end
                 end
             end
-            taxa_labels[temp_labels[1]] = temp_labels[2]
+            if !(temp_labels[2] in taxa_to_remove)
+                taxa_labels[temp_labels[1]] = temp_labels[2]
+            end
             if occursin(";", line)
                 labels = false
             end
