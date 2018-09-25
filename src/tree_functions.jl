@@ -1,4 +1,9 @@
-# Struct to store relevant information about a CA
+"""
+    Rule(idxs::Tuple{Vararg{Int}}, char_attr::Tuple{Vararg{Char}},
+    is_pure::Bool, num_group::Int, num_non_group::Int, occurances::Int)
+
+Struct to store relevant information about a CA
+"""
 struct Rule
     idxs::Tuple{Vararg{Int}}
     char_attr::Tuple{Vararg{Char}}
@@ -8,7 +13,11 @@ struct Rule
     occurances::Int
 end
 
-# Struct to store a node (is recursive)
+"""
+    Node(CAs::Array{Rule,1}, taxa_label::String="")
+
+Struct to store a node (is recursive)
+"""
 struct Node
     CAs::Array{Rule,1}
     children::Array{Node,1}
@@ -19,7 +28,15 @@ struct Node
     end
 end
 
-# Function to remove a specific taxa from a tree in Newick Format
+"""
+    remove_from_tree!(tree_tokens::Vector{String}, taxa_to_remove::Union{Array{String,1},Bool})
+
+Takes a tree in Newick format, removes a specific taxa
+
+# Arguments
+- `tree_tokens::Vector{String}`: the tree in Newick format, tokenized.
+- `taxa_to_remove::Union{Array{String,1},Bool}`: the taxa that will be removed.
+"""
 function remove_from_tree!(tree_tokens::Vector{String}, taxa_to_remove::Union{Array{String,1},Bool})
 
     tokens_removed = 0
@@ -68,7 +85,15 @@ function remove_from_tree!(tree_tokens::Vector{String}, taxa_to_remove::Union{Ar
     return tree_tokens
 end
 
-# Function to produce nodes and relevant groups and taxa from a tree in newick form
+"""
+    get_nodes(tree::String ; taxa_to_remove::Union{Array{String,1},Bool}=false)
+
+Takes a tree in Newick format, returns an internal representation of the tree
+
+# Arguments
+- `tree::String`: the tree in Newick format.
+- `taxa_to_remove::Union{Array{String,1},Bool}=false`: the taxa that will be removed (if applicable).
+"""
 function get_nodes(tree::String ; taxa_to_remove::Union{Array{String,1},Bool}=false)
 
     # Initialize variables
@@ -131,7 +156,15 @@ function get_nodes(tree::String ; taxa_to_remove::Union{Array{String,1},Bool}=fa
     return nodes
 end
 
-# Function to parse a newick tree file into nodes and labels matching character sequences
+"""
+    parse_tree(file_path::String; taxa_to_remove::Union{Array{String,1},Bool}=false)
+
+Takes a Nexus file for a tree, returns an internal representation of that tree (and other relevant information)
+
+# Arguments
+- `file_path::String`: file path to the Nexus file.
+- `taxa_to_remove::Union{Array{String,1},Bool}=false`: the taxa that will be removed (if applicable).
+"""
 function parse_tree(file_path::String; taxa_to_remove::Union{Array{String,1},Bool}=false)
 
     # Initialize variables
@@ -212,6 +245,25 @@ function parse_tree(file_path::String; taxa_to_remove::Union{Array{String,1},Boo
 end
 
 # Function to get all the CA's from all the nodes of a tree into proper format
+"""
+    add_nodes!(tree::Node,sPu::Array{Dict{String,Any}},sPr::Array{Dict{String,Any}},
+    cPu::Array{Dict{String,Any}},cPr::Array{Dict{String,Any}},taxa_labels::Dict{String,String},
+    character_labels::Dict{String,String},nodes::Array{Dict{String,Any}},node_num::Int64;complex::Bool=true)
+
+Takes a tree (Node), adds all the CA's from the entire tree into the internal representation
+
+# Arguments
+- `tree::Node`: the tree represented as a Node.
+- `sPu::Array{Dict{String,Any}}`: an array of simple pure rules.
+- `sPr::Array{Dict{String,Any}}`: an array of simple private rules.
+- `cPu::Array{Dict{String,Any}}`: an array of complex pure rules.
+- `cPr::Array{Dict{String,Any}}`: an array of complex private rules.
+- `taxa_labels::Dict{String,String}`: a mapping of the taxa labels to the character labels.
+- `character_labels::Dict{String,String}`: a mapping of the character labels to the corresponding sequences.
+- `nodes::Array{Dict{String,Any}}`: an array of nodes.
+- `node_num::Int64`: the current node number.
+- `complex::Bool=true`: indicates whether complex rules should be calculated
+"""
 function add_nodes!(tree::Node,sPu::Array{Dict{String,Any}},sPr::Array{Dict{String,Any}},cPu::Array{Dict{String,Any}},cPr::Array{Dict{String,Any}},taxa_labels::Dict{String,String},character_labels::Dict{String,String},nodes::Array{Dict{String,Any}},node_num::Int64;complex::Bool=true)
 
     # Iterate through each group at a node
