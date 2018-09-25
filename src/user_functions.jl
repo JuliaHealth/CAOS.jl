@@ -1,15 +1,3 @@
-using Bio.Tools.BLAST
-using Bio.Seq
-using JSON
-using FastaIO
-using Tokenize
-
-include("caos_functions.jl")
-include("tree_functions.jl")
-include("utils.jl")
-include("classification.jl")
-include("gap_imputation.jl")
-
 # Only for simple rules
 function generate_caos_rules(tree_file_path::String, output_directory::String)
 
@@ -24,8 +12,8 @@ function generate_caos_rules(tree_file_path::String, output_directory::String)
 
     # Initialize variables for constructing tree
     sPu, sPr = get_sPu_and_sPr(nodes, 1, taxa_labels, character_labels)
-    cPu = Array{Dict{String,Any}}(0)
-    cPr = Array{Dict{String,Any}}(0)
+    cPu = Array{Dict{String,Any}}(undef, 0)
+    cPr = Array{Dict{String,Any}}(undef, 0)
     #cPu,cPr = get_cPu_and_cPr(nodes,1,taxa_labels,character_labels,sPu,sPr)
 
     # Get CA's for tree

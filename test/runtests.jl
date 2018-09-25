@@ -1,13 +1,24 @@
-using CAOS
+module TestCAOS
 
-tree, character_labels, taxa_labels = generate_caos_rules("/data/S10593.nex", "/data/output")
+    using CAOS
+    using Test
 
-@test typeof(tree) == Node
+    all_tests = [
+        ("tree_functions.jl",   "           Testing: Tree functions"),
+    #    ("gap_imputation.jl",     "       Testing: Gap imputation"),
+    #    ("classification.jl",     "       Testing: Classification"),
+    #    ("user_functions.jl",     "       Testing: User functions"),
+    #    ("caos_functions.jl",     "       Testing: CAOS functions"),
+        ("utils.jl",     "       Testing: Utils")
 
-# classification = classify_new_sequence(tree, character_labels, taxa_labels, "/data/Example_Sequence.txt", "/data/output")
+        ]
 
-# @test typeof(classification) == String
+    println("Running tests:")
 
-tree2, character_labels2, taxa_labels2 = load_tree("/data/output")
+    for (t, test_string) in all_tests
+        println("-----------------------------------------")
+        println(test_string)
+        include(t)
+    end
 
-@test typeof(tree2) == Node
+end

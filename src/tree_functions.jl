@@ -20,7 +20,7 @@ struct Node
 end
 
 # Function to remove a specific taxa from a tree in Newick Format
-function remove_from_tree(tree_tokens::Vector{String}, taxa_to_remove::Any)
+function remove_from_tree!(tree_tokens::Vector{String}, taxa_to_remove::Union{Array{String,1},Bool})
 
     tokens_removed = 0
 
@@ -69,19 +69,19 @@ function remove_from_tree(tree_tokens::Vector{String}, taxa_to_remove::Any)
 end
 
 # Function to produce nodes and relevant groups and taxa from a tree in newick form
-function get_nodes(tree::String ; taxa_to_remove::Any=false)
+function get_nodes(tree::String ; taxa_to_remove::Union{Array{String,1},Bool}=false)
 
     # Initialize variables
     num_nodes = 1
     curr_node = 1
-    nodes = Array{Dict{String,Any}}(0)
+    nodes = Array{Dict{String,Any}}(undef, 0)
 
     # Split tree string into tokens
     tree_tokens = [untokenize(token) for token in collect(tokenize(tree))]
 
     # Remove taxa from tree if applicable
     if !(taxa_to_remove == false)
-        tree_tokens = remove_from_tree(tree_tokens, taxa_to_remove)
+        tree_tokens = remove_from_tree!(tree_tokens, taxa_to_remove)
     end
 
     # Iterate through each token
@@ -89,7 +89,7 @@ function get_nodes(tree::String ; taxa_to_remove::Any=false)
 
         # Start of a new node
         if char == "("
-            push!(nodes, Dict{String,Any}("Groups" => 0, "Taxa" => Array{String}(0), "Descendents" => Array{Int}(0)))
+            push!(nodes, Dict{String,Any}("Groups" => 0, "Taxa" => Array{String}(undef, 0), "Descendents" => Array{Int}(undef, 0)))
             paren = 1
 
             # Iterate through the rest of the tree tokens
@@ -132,7 +132,7 @@ function get_nodes(tree::String ; taxa_to_remove::Any=false)
 end
 
 # Function to parse a newick tree file into nodes and labels matching character sequences
-function parse_tree(file_path::String ; taxa_to_remove::Any=false)
+function parse_tree(file_path::String; taxa_to_remove::Union{Array{String,1},Bool}=false)
 
     # Initialize variables
     character_labels = Dict{String,String}()
@@ -163,7 +163,7 @@ function parse_tree(file_path::String ; taxa_to_remove::Any=false)
         if occursin("TREE ", line) && occursin("=", line)
             clean_line = String(strip(replace(line, r":[-+]?[0-9]*\.?[0-9]*" => "")))
 
-            nodes = get_nodes(clean_line,taxa_to_remove=taxa_to_remove)
+            nodes = get_nodes(clean_line,taxa_to_remove = taxa_to_remove)
             break
         end
 
@@ -173,7 +173,9 @@ function parse_tree(file_path::String ; taxa_to_remove::Any=false)
                 characters = false
             else
                 split_line = split(line)
-                character_labels[split_line[1]] = split_line[2]
+                if !(split_line[1] in taxa_to_remove)
+                    character_labels[split_line[1]] = split_line[2]
+                end
             end
         end
 
@@ -189,7 +191,9 @@ function parse_tree(file_path::String ; taxa_to_remove::Any=false)
                     end
                 end
             end
-            taxa_labels[temp_labels[1]] = temp_labels[2]
+            if !(temp_labels[2] in taxa_to_remove)
+                taxa_labels[temp_labels[1]] = temp_labels[2]
+            end
             if occursin(";", line)
                 labels = false
             end
@@ -208,7 +212,7 @@ function parse_tree(file_path::String ; taxa_to_remove::Any=false)
 end
 
 # Function to get all the CA's from all the nodes of a tree into proper format
-function add_nodes(tree::Node,sPu::Array{Dict{String,Any}},sPr::Array{Dict{String,Any}},cPu::Array{Dict{String,Any}},cPr::Array{Dict{String,Any}},taxa_labels::Dict{String,String},character_labels::Dict{String,String},nodes::Array{Dict{String,Any}},node_num::Int64;complex::Bool=true)
+function add_nodes!(tree::Node,sPu::Array{Dict{String,Any}},sPr::Array{Dict{String,Any}},cPu::Array{Dict{String,Any}},cPr::Array{Dict{String,Any}},taxa_labels::Dict{String,String},character_labels::Dict{String,String},nodes::Array{Dict{String,Any}},node_num::Int64;complex::Bool=true)
 
     # Iterate through each group at a node
     for (group_idx, taxa) in enumerate(get_group_taxa_at_node(nodes, node_num))
