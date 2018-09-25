@@ -28,7 +28,8 @@ before_install:
       export PATH="$HOME/miniconda/bin:$PATH";
       conda install blast -y -f -c bioconda;
     fi
+before_script:
+  - export PATH=$HOME/.local/bin:$PATH
 after_success:
-  - julia -e 'using Pkg; cd(Pkg.dir("CAOS")); Pkg.add("Coverage"); using Coverage; Coveralls.submit(Coveralls.process_folder())'
-  # push coverage results to Codecov
-  # - julia -e 'using Pkg; cd(Pkg.dir("CAOS")); PPkg.add(PackageSpec(name="Coverage", version="0.5.3")); using Coverage; Coveralls.submit(Codecov.process_folder())'
+  - julia -e 'import Pkg; Pkg.add("Coverage"); using Coverage; Coveralls.submit(Coveralls.process_folder())'
+  - julia -e 'import Pkg; Pkg.add("Coverage"); using Coverage; Codecov.submit(Codecov.process_folder())'
