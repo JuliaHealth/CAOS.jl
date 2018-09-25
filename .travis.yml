@@ -30,8 +30,8 @@ before_install:
     fi
 
 script:
-  - julia --check-bounds=yes -e 'using Pkg; Pkg.clone(pwd()); Pkg.test("CAOS", coverage=true)'
-  
+  - julia --check-bounds=yes -e 'using Pkg; Pkg.test("CAOS", coverage=true)'
+
 after_success:
   - julia -e 'cd(using Pkg; Pkg.dir("CAOS")); Pkg.add("Coverage"); using Coverage; Coveralls.submit(Coveralls.process_folder())'
   # push coverage results to Codecov
