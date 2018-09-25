@@ -9,7 +9,10 @@
     end
 
     @testset "get_max_depth" begin
-        
+        tree = load_tree("data/output")
+        println(length(tree[1].children))
+        println(get_max_depth(tree[1], 10))
+        @test typeof(tree[1]) == CAOS.Node
     end
 
 end
