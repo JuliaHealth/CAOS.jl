@@ -1,6 +1,6 @@
 using Tokenize
 
-@testset "tree load" begin
+@testset "parse_tree" begin
     tree = parse_tree("data/S10593.nex")
     @test length(tree) == 4
 
