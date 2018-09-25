@@ -11,7 +11,10 @@ export generate_caos_rules,
        parse_tree,
        load_tree,
        get_nodes,
-       remove_from_tree!
+       remove_from_tree!,
+       remove_blanks,
+       get_max_depth,
+       find_sequence
 
 include("caos_functions.jl")
 include("tree_functions.jl")
