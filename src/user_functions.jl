@@ -18,7 +18,7 @@ function generate_caos_rules(tree_file_path::String, output_directory::String)
 
     # Get CA's for tree
     tree = Node([])
-    add_nodes(tree,sPu,sPr,cPu,cPr,taxa_labels,character_labels,nodes,1,complex=false)
+    add_nodes!(tree,sPu,sPr,cPu,cPr,taxa_labels,character_labels,nodes,1,complex=false)
 
     # Save tree to json
     tree_data = JSON.json(tree)

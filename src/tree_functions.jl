@@ -264,8 +264,8 @@ function add_nodes!(tree::Node,sPu::Array{Dict{String,Any}},sPr::Array{Dict{Stri
             else
                 new_cPu, new_cPr = cPu, cPr
             end
-            print("$node_num \n")
-            add_nodes(tree.children[group_idx],new_sPu,new_sPr,new_cPu,new_cPr,taxa_labels,character_labels,nodes,new_node_num,complex=complex)
+            #print("$node_num \n")
+            add_nodes!(tree.children[group_idx],new_sPu,new_sPr,new_cPu,new_cPr,taxa_labels,character_labels,nodes,new_node_num,complex=complex)
         end
     end
 end
