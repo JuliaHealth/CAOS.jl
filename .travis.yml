@@ -29,6 +29,6 @@ before_install:
       conda install blast -y -f -c bioconda;
     fi
 after_success:
-  - julia -e 'cd(using Pkg; Pkg.add("Coverage"); using Coverage; Coveralls.submit(Coveralls.process_folder())'
+  - julia -e 'using Pkg; cd(Pkg.dir("CAOS")); Pkg.add("Coverage"); using Coverage; Coveralls.submit(Coveralls.process_folder())'
   # push coverage results to Codecov
-  - julia -e 'cd(using Pkg; Pkg.add("Coverage"); using Coverage; Codecov.submit(Codecov.process_folder())'
+  - julia -e 'using Pkg; cd(Pkg.dir("CAOS")); Pkg.add("Coverage"); using Coverage; Coveralls.submit(Codecov.process_folder())'
