@@ -1,4 +1,12 @@
-# Function to change the blanks in a dictionary of character labels to N's
+"""
+    remove_blanks(char_label_dict::Dict{String,String} ; change_to_N::Bool=false)
+
+Changes all blanks to N's in character sequences.
+
+# Arguments
+- `char_label_dict::Dict{String,String}`: character label mappings.
+- `change_to_N::Bool=false`: whether to change to N or just remove.
+"""
 function remove_blanks(char_label_dict::Dict{String,String} ; change_to_N::Bool=false)
     character_labels_no_blanks = Dict{String,String}()
     for (key,value) in char_label_dict
@@ -11,7 +19,15 @@ function remove_blanks(char_label_dict::Dict{String,String} ; change_to_N::Bool=
     return character_labels_no_blanks
 end
 
-# Function to get the max depth of a tree
+"""
+    get_max_depth(tree::Node, depth::Int64)
+
+Takes a tree (Node) and gets the maximum depth.
+
+# Arguments
+- `tree::Node`: the tree represented as a Node.
+- `depth::Int64`: current depth.
+"""
 function get_max_depth(tree::Node, depth::Int64)
 
     # Initialize varibale
@@ -42,7 +58,15 @@ function get_max_depth(tree::Node, depth::Int64)
     return maximum(depths)
 end
 
-# Function to get the smallest subtree that contains the given taxa
+"""
+    find_sequence(tree::Node, taxa_label::String)
+
+Takes a tree (Node) and a taxa label and finds the subtree containing that sequence.
+
+# Arguments
+- `tree::Node`: the tree represented as a Node.
+- `taxa_label::String`: taxa label.
+"""
 function find_sequence(tree::Node, taxa_label::String)
 
     # Initialize variables
@@ -70,7 +94,16 @@ function find_sequence(tree::Node, taxa_label::String)
     end
 end
 
-# Function to get the neighbors of a taxa (taxa that come after from the subtree containing the input taxa)
+"""
+    get_neighbors(tree::Node, taxa_label::String)
+
+Takes a tree (Node) and a taxa label and finds all the neighbors (taxa that come after from
+the subtree containing the input taxa).
+
+# Arguments
+- `tree::Node`: the tree represented as a Node.
+- `taxa_label::String`: taxa label.
+"""
 function get_neighbors(tree::Node, taxa_label::String)
 
     # Initialize variables
@@ -100,7 +133,15 @@ function get_neighbors(tree::Node, taxa_label::String)
     return neighbors
 end
 
-# Function to get all the duplicate labels that exist
+"""
+    get_duplicate_labels(character_labels::Dict{String,String}, label::String)
+
+Takes the character labels and a specific label and finds if any other sequences are the same.
+
+# Arguments
+- `character_labels::Dict{String,String}`: character label mappings.
+- `label::String`: taxa label to search for duplicates of.
+"""
 function get_duplicate_labels(character_labels::Dict{String,String}, label::String)
 
     # Initialize variables
@@ -123,7 +164,16 @@ function get_duplicate_labels(character_labels::Dict{String,String}, label::Stri
     return duplicates
 end
 
-# Function to get all the possible neighbors of a taxa (duplicates included)
+"""
+    get_all_neighbors(tree::Node, character_labels::Dict{String,String}, taxa_label::String)
+
+Takes a tree (Node) and a taxa label and finds all the neighbors (including duplicates).
+
+# Arguments
+- `tree::Node`: the tree represented as a Node.
+- `character_labels::Dict{String,String}`: character label mappings.
+- `taxa_label::String`: taxa label.
+"""
 function get_all_neighbors(tree::Node, character_labels::Dict{String,String}, taxa_label::String)
 
     # Get the subtree for the input taxa
@@ -152,7 +202,15 @@ function get_all_neighbors(tree::Node, character_labels::Dict{String,String}, ta
     return unique(neighbors)
 end
 
-# Function to adjust the start of the matched subject based on its blanks
+"""
+    get_adjusted_start(original_start::Int, subject::String)
+
+Adjusts the start of the matched subject based on its blanks.
+
+# Arguments
+- `original_start::Int`: the index of the original starting position.
+- `subject::String`: the matched subject.
+"""
 function get_adjusted_start(original_start::Int, subject::String)
 
     # Initialize variables
@@ -176,7 +234,14 @@ function get_adjusted_start(original_start::Int, subject::String)
     return original_start + num_blanks
 end
 
-# Function to extract a taxa label from a tree
+"""
+    get_first_taxa_from_tree(tree::Node)
+
+Gets the first taxa from a tree.
+
+# Arguments
+- `tree::Node`: the tree represented as a Node.
+"""
 function get_first_taxa_from_tree(tree::Node)
     if tree.taxa_label == ""
         fefn
@@ -185,7 +250,15 @@ function get_first_taxa_from_tree(tree::Node)
     end
 end
 
-# Function to downsample a set of taxa
+"""
+    downsample_taxa(taxa::Array{String}, perc_keep::Float64)
+
+Downsamples taxa by a certain percentage.
+
+# Arguments
+- `taxa::Array{String}`: list of taxa.
+- `perc_keep::Float64`: percentage of taxa to keep.
+"""
 function downsample_taxa(taxa::Array{String}, perc_keep::Float64)
     num_total_taxa = 1
     num_new_taxa = 0
@@ -200,7 +273,14 @@ function downsample_taxa(taxa::Array{String}, perc_keep::Float64)
     return new_taxa
 end
 
-# Function to get all descendents of a tree
+"""
+    get_descendents(tree::Node)
+
+Gets descendents of a Node (tree or subtree).
+
+# Arguments
+- `tree::Node`: the tree represented as a Node.
+"""
 function get_descendents(tree::Node)
 
     # Initialize variables

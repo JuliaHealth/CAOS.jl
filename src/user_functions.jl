@@ -1,4 +1,13 @@
 # Only for simple rules
+"""
+    generate_caos_rules(tree_file_path::String, output_directory::String)
+
+Takes a Nexus file and generates all the CAOS rules for the tree.
+
+# Arguments
+- `tree_file_path::String`: path to the Nexus file.
+- `output_directory::String`: path to the output directory.
+"""
 function generate_caos_rules(tree_file_path::String, output_directory::String)
 
     # Create directory
@@ -49,7 +58,28 @@ function generate_caos_rules(tree_file_path::String, output_directory::String)
 
 end
 
-function classify_new_sequence(tree::Node, character_labels::Dict{String,String}, taxa_labels::Dict{String,String}, sequence_file_path::String, output_directory::String ; all_CA_weights::Dict{Int64,Dict{String,Int64}}=Dict(1=>Dict("sPu"=>1,"sPr"=>1,"cPu"=>1,"cPr"=>1)), occurrence_weighting::Bool=false, tiebreaker::Vector{Dict{String,Int64}}=[Dict{String,Int64}()], combo_classification::Bool=false)
+"""
+    classify_new_sequence(tree::Node, character_labels::Dict{String,String}, taxa_labels::Dict{String,String},
+    sequence_file_path::String, output_directory::String ; all_CA_weights::Dict{Int64,
+    Dict{String,Int64}}=Dict(1=>Dict("sPu"=>1,"sPr"=>1,"cPu"=>1,"cPr"=>1)), occurrence_weighting::Bool=false,
+    tiebreaker::Vector{Dict{String,Int64}}=[Dict{String,Int64}()], combo_classification::Bool=false)
+
+Takes a tree (Node) and a sequence, and classifies the new sequence using the CAOS tree.
+
+# Arguments
+- `tree::Node`: the tree represented as a Node.
+- `character_labels::Dict{String,String}`: a mapping of the character labels to the corresponding sequences.
+- `taxa_labels::Dict{String,String}`: a mapping of the taxa labels to the character labels.
+- `sequence_file_path::String`: a file path to the sequence to classify.
+- `output_directory::String`: path to the output directory.
+- `all_CA_weights::Dict{Int64,Dict{String,Int64}}=Dict(1=>Dict("sPu"=>1,"sPr"=>1,"cPu"=>1,"cPr"=>1))`: CA weights to be used.
+- `occurrence_weighting::Bool=false`: whether to use occurence weighting in classification.
+- `tiebreaker::Vector{Dict{String,Int64}}=[Dict{String,Int64}()]`: tiebreaker to be used in classification.
+- `combo_classification::Bool=false`: whether to use a combo of Blast and CAOS for classification.
+"""
+function classify_new_sequence(tree::Node, character_labels::Dict{String,String}, taxa_labels::Dict{String,String},
+    sequence_file_path::String, output_directory::String ; all_CA_weights::Dict{Int64,Dict{String,Int64}}=Dict(1=>Dict("sPu"=>1,"sPr"=>1,"cPu"=>1,"cPr"=>1)),
+    occurrence_weighting::Bool=false, tiebreaker::Vector{Dict{String,Int64}}=[Dict{String,Int64}()], combo_classification::Bool=false)
 
     # Create directory
     try
@@ -69,6 +99,14 @@ function classify_new_sequence(tree::Node, character_labels::Dict{String,String}
 end
 
 # Function to read a tree from file and convert it to a node object
+"""
+    load_tree(directory::String)
+
+Loads a CAOS tree from file.
+
+# Arguments
+- `directory::String`: path to directory where tree exists.
+"""
 function load_tree(directory::String)
 
     # Load tree from json

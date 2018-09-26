@@ -1,4 +1,12 @@
-# Function to get the sets of taxa for each group at a node
+"""
+    get_group_taxa_at_node(nodes::Array{Dict{String,Any}}, node_num::Int64)
+
+Gets the sets of taxa for each group at a node.
+
+# Arguments
+- `nodes::Array{Dict{String,Any}}`: list of nodes.
+- `node_num::Int64`: current node index.
+"""
 function get_group_taxa_at_node(nodes::Array{Dict{String,Any}}, node_num::Int64)
 
     #Initialize varibales
@@ -29,7 +37,14 @@ function get_group_taxa_at_node(nodes::Array{Dict{String,Any}}, node_num::Int64)
     return groups
 end
 
-# Function to get all the combinations of group vs non groups
+"""
+    get_group_combos(group_taxa::Array{Array{String}})
+
+Gets all the combinations of group vs non groups.
+
+# Arguments
+- `group_taxa::Array{Array{String}}`: list of taxa within a group.
+"""
 function get_group_combos(group_taxa::Array{Array{String}})
     combos = Array{Dict{String,Array{String}}}(undef, 0)
     for (idx, group) in enumerate(group_taxa)
@@ -44,7 +59,18 @@ function get_group_combos(group_taxa::Array{Array{String}})
     return combos
 end
 
-# Function to get all the sPu and sPr for the entire character sequence at a specific node
+"""
+    get_sPu_and_sPr(nodes::Array{Dict{String,Any}}, node_num::Int64,
+    taxa_labels::Dict{String,String}, character_labels::Dict{String,String})
+
+Gets all the sPu and sPr for the entire character sequence at a specific node.
+
+# Arguments
+- `nodes::Array{Dict{String,Any}}`: list of nodes.
+- `node_num::Int64`: current node index.
+- `taxa_labels::Dict{String,String}`: a mapping of the taxa labels to the character labels.
+- `character_labels::Dict{String,String}`: a mapping of the character labels to the corresponding sequences.
+"""
 function get_sPu_and_sPr(nodes::Array{Dict{String,Any}}, node_num::Int64, taxa_labels::Dict{String,String}, character_labels::Dict{String,String})
 
     # Initialize variables
@@ -136,6 +162,20 @@ function get_sPu_and_sPr(nodes::Array{Dict{String,Any}}, node_num::Int64, taxa_l
 end
 
 # Function to get all the cPu and cPr for the entire character sequence at a specific node ----- function currently not supported for nucleotide options
+"""
+    get_cPu_and_cPr(nodes::Array{Dict{String,Any}}, node_num::Int64, taxa_labels::Dict{String,String},
+    character_labels::Dict{String,String}, sPu::Array{Dict{String,Any}}, sPr::Array{Dict{String,Any}})
+
+Gets all the cPu and cPr for the entire character sequence at a specific node (does not support nucleotide options).
+
+# Arguments
+- `nodes::Array{Dict{String,Any}}`: list of nodes.
+- `node_num::Int64`: current node index.
+- `taxa_labels::Dict{String,String}`: a mapping of the taxa labels to the character labels.
+- `character_labels::Dict{String,String}`: a mapping of the character labels to the corresponding sequences.
+- `sPu::Array{Dict{String,Any}}`: list of simple pure rules.
+- `sPr::Array{Dict{String,Any}}`: list of simple private rules.
+"""
 function get_cPu_and_cPr(nodes::Array{Dict{String,Any}}, node_num::Int64, taxa_labels::Dict{String,String}, character_labels::Dict{String,String}, sPu::Array{Dict{String,Any}}, sPr::Array{Dict{String,Any}})
 
     # Figure out which indices have already been matched to an sPu or sPr

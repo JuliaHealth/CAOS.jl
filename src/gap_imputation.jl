@@ -1,4 +1,12 @@
-# Function to take a tree loaded from json and convert it back to a proper struct
+"""
+    convert_to_struct(tree_dict::Dict{String,Any}, tree_obj::Node)
+
+Takes a tree loaded from json and convert it back to a proper internal representation.
+
+# Arguments
+- `tree_dict::Dict{String,Any}`: tree as a dictionary after being read from json.
+- `tree_obj::Node`: the tree (Node).
+"""
 function convert_to_struct(tree_dict::Dict{String,Any}, tree_obj::Node)
 
     # Iterate through each child of a node
@@ -30,7 +38,15 @@ function convert_to_struct(tree_dict::Dict{String,Any}, tree_obj::Node)
     return tree_obj
 end
 
-# Function to get a new subject from blastn
+"""
+    get_next_hit(hitnames::Vector{String}, hit_idx::Int64)
+
+Gets the next best hit returned from a blastn search.
+
+# Arguments
+- `hitnames::Vector{String}`: a list of all blastn hitnames.
+- `hit_idx::Int64`: index of the current hit.
+"""
 function get_next_hit(hitnames::Vector{String}, hit_idx::Int64)
 
     # Initialize varibales
@@ -58,7 +74,24 @@ function get_next_hit(hitnames::Vector{String}, hit_idx::Int64)
     return new_hit,new_idx+hit_idx
 end
 
-# Function to add blanks to the back of a query/subject blast match
+"""
+    add_blanks_to_back(subject::String, query::String, new_seq::String,
+    subj_len::Int64, query_len::Int64, subj_non_blanks::Int64,
+    hitnames::Vector{String}, hit_idx::Int64, character_labels::Dict{String,String})
+
+Adds blanks to the back of a sequence from a blast match.
+
+# Arguments
+- `subject::String`: the subject the query is being matched to.
+- `query::String`: the query that is having blanks added to it.
+- `new_seq::String`: the new sequence (query with added blanks).
+- `subj_len::Int64`: length of the subject.
+- `query_len::Int64`: length of the query.
+- `subj_non_blanks::Int64`: number of non blanks in the subject.
+- `hitnames::Vector{String}`: list of blast hits.
+- `hit_idx::Int64`: index of the current blast hit.
+- `character_labels::Dict{String,String}`: a mapping of the character labels to the corresponding sequences.
+"""
 function add_blanks_to_back(subject::String, query::String, new_seq::String, subj_len::Int64, query_len::Int64, subj_non_blanks::Int64, hitnames::Vector{String}, hit_idx::Int64, character_labels::Dict{String,String})
 
     # If empty, return the sequence, and blanks to keep the same length as the subject
@@ -106,7 +139,24 @@ function add_blanks_to_back(subject::String, query::String, new_seq::String, sub
     end
 end
 
-# Function to add blanks to the front of a query/subject blast match
+"""
+    add_blanks_to_front(subject::String, query::String, new_seq::String,
+    subj_len::Int64, query_len::Int64, subj_non_blanks::Int64,
+    hitnames::Vector{String}, hit_idx::Int64, character_labels::Dict{String,String})
+
+Adds blanks to the front of a sequence from a blast match.
+
+# Arguments
+- `subject::String`: the subject the query is being matched to.
+- `query::String`: the query that is having blanks added to it.
+- `new_seq::String`: the new sequence (query with added blanks).
+- `subj_len::Int64`: length of the subject.
+- `query_len::Int64`: length of the query.
+- `subj_non_blanks::Int64`: number of non blanks in the subject.
+- `hitnames::Vector{String}`: list of blast hits.
+- `hit_idx::Int64`: index of the current blast hit.
+- `character_labels::Dict{String,String}`: a mapping of the character labels to the corresponding sequences.
+"""
 function add_blanks_to_front(subject::String, query::String, new_seq::String, subj_len::Int64, query_len::Int64, subj_non_blanks::Int64, hitnames::Vector{String}, hit_idx::Int64, character_labels::Dict{String,String})
 
     # If empty, return the sequence, and blanks to keep the same length as the subject
@@ -154,7 +204,18 @@ function add_blanks_to_front(subject::String, query::String, new_seq::String, su
     end
 end
 
-# Function to get the hit from blastn that has the most sequence coverage with no gaps compared to the query sequence
+"""
+    get_best_hit(results::Array{BioTools.BLAST.BLASTResult,1}, query::String,
+    character_labels::Dict{String,String},  character_labels_no_gaps::Dict{String,String})
+
+Gets the hit from blastn that has the most sequence coverage with no gaps compared to the query sequence.
+
+# Arguments
+- `results::Array{BioTools.BLAST.BLASTResult,1}`: blastn results.
+- `query::String`: the query that is having blanks added to it.
+- `character_labels::Dict{String,String}`: a mapping of the character labels to the corresponding sequences.
+- `character_labels_no_gaps::Dict{String,String}`: character labels with gaps removed from sequences.
+"""
 function get_best_hit(results::Array{BioTools.BLAST.BLASTResult,1}, query::String, character_labels::Dict{String,String},  character_labels_no_gaps::Dict{String,String})
 
     # Initialize varibales
@@ -188,7 +249,19 @@ function get_best_hit(results::Array{BioTools.BLAST.BLASTResult,1}, query::Strin
     return results[indmin(error)]
 end
 
-# Function to add blanks to an input sequence given a database
+"""
+    add_blanks(query_path::String, db_path::String, character_labels::Dict{String,String},
+    character_labels_no_gaps::Dict{String,String} ; return_blast::Bool=false)
+
+Adds blanks to an input sequence given a database.
+
+# Arguments
+- `query_path::String`: path to the query file.
+- `db_path::String`: path to the blast database.
+- `character_labels::Dict{String,String}`: a mapping of the character labels to the corresponding sequences.
+- `character_labels_no_gaps::Dict{String,String}`: character labels with gaps removed from sequences.
+- `return_blast::Bool=false`: whether to return blast results.
+"""
 function add_blanks(query_path::String, db_path::String, character_labels::Dict{String,String}, character_labels_no_gaps::Dict{String,String} ; return_blast::Bool=false)
 
     # Initialize

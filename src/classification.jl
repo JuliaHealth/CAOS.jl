@@ -1,4 +1,14 @@
-# Function to count the number of CA's matched ----- does not support complex rules
+"""
+    CA_matches(sequence::String, CAs::Vector{Rule}, CA_weights::Dict{String,Int64}, occurrence_weighting::Bool)
+
+Counts the number of CA's matched by a sequence (only support for simple rules).
+
+# Arguments
+- `sequence::String`: sequence to count matches.
+- `CAs::Vector{Rule}`: list of all CA's.
+- `CA_weights::Dict{String,Int64}`: weights to use for CA counts.
+- `occurrence_weighting::Bool`: whether to use occurrence weighting during counting.
+"""
 function CA_matches(sequence::String, CAs::Vector{Rule}, CA_weights::Dict{String,Int64}, occurrence_weighting::Bool)
 
     letter_transformations = Dict{Char,Vector{Char}}('A'=>['A'], 'T'=>['T'], 'C'=>['C'], 'G'=>['G'], 'U'=>['U'], 'R'=>['A','G'], 'Y'=>['C','T'], 'S'=>['G','C'], 'W'=>['A','T'], 'K'=>['G','T'], 'M'=>['A','C'], 'B'=>['C','G','T'], 'D'=>['A','G','T'], 'H'=>['A','C','T'], 'V'=>['A','C','G'], 'N'=>['A','T','C','G'], '-'=>['-'])
@@ -66,7 +76,24 @@ function CA_matches(sequence::String, CAs::Vector{Rule}, CA_weights::Dict{String
     return Int(round(total_score))
 end
 
-# Fucntion to classify an input sequence given a phylogentic tree
+"""
+    classify_sequence(sequence::String, tree::Node, CA_weights::Dict{String,Int64},
+    all_CA_weights::Dict{Int64,Dict{String,Int64}}, occurrence_weighting::Bool,
+    depth::Int64, tiebreaker::Vector{Dict{String,Int64}} ; blast_results=["Fake Label"], combo_classification::Bool=false)
+
+Classifies an input sequence given a phylogentic tree.
+
+# Arguments
+- `sequence::String`: sequence to count matches.
+- `tree::Node`: the tree represented as a Node.
+- `CA_weights::Dict{String,Int64}`: weights to use for CA counts.
+- `all_CA_weights::Dict{Int64,Dict{String,Int64}}`: all sets of weights to use for CA counts.
+- `occurrence_weighting::Bool`: whether to use occurrence weighting during counting.
+- `depth::Int64`: current depth of the tree.
+- `tiebreaker::Vector{Dict{String,Int64}}`: tiebreaking procedures to use.
+- `blast_results=["Fake Label"]`: list of blast results.
+- `combo_classification::Bool=false`: whether to use both Blast and CAOS for classification.
+"""
 function classify_sequence(sequence::String, tree::Node, CA_weights::Dict{String,Int64}, all_CA_weights::Dict{Int64,Dict{String,Int64}}, occurrence_weighting::Bool, depth::Int64, tiebreaker::Vector{Dict{String,Int64}} ; blast_results=["Fake Label"], combo_classification::Bool=false)
 
     if haskey(all_CA_weights, depth)
@@ -133,8 +160,23 @@ function classify_sequence(sequence::String, tree::Node, CA_weights::Dict{String
     end
 end
 
+"""
+    CV_classification(taxa_label::String, character_labels::Dict{String,String},
+    gene::String, percent_test::String, all_CA_weights::Dict{Int,Dict{String,Int64}},
+    occurrence_weighting::Bool, tiebreaker::Vector{Dict{String,Int64}}; combo_classification::Bool=false)
 
-# Function to get the classification for a LOOCV tree
+Gets the classification for a LOOCV tree.
+
+# Arguments
+- `taxa_label::String`: taxa to classify.
+- `character_labels::Dict{String,String}`: a mapping of the character labels to the corresponding sequences.
+- `gene::String`: gene which is being classified.
+- `percent_test::String`: percent we are testing on.
+- `all_CA_weights::Dict{Int64,Dict{String,Int64}}`: all sets of weights to use for CA counts.
+- `occurrence_weighting::Bool`: whether to use occurrence weighting during counting.
+- `tiebreaker::Vector{Dict{String,Int64}}`: tiebreaking procedures to use.
+- `combo_classification::Bool=false`: whether to use both Blast and CAOS for classification.
+"""
 function CV_classification(taxa_label::String, character_labels::Dict{String,String}, gene::String, percent_test::String, all_CA_weights::Dict{Int,Dict{String,Int64}}, occurrence_weighting::Bool, tiebreaker::Vector{Dict{String,Int64}}; combo_classification::Bool=false)
 
     home_dir = "/users/jkatz/scratch/Desktop"
@@ -165,7 +207,19 @@ function CV_classification(taxa_label::String, character_labels::Dict{String,Str
     return classification
 end
 
-# Function to check if the classification from a LOOCV tree is correct
+"""
+    check_CV_classification(taxa_label::String, character_labels::Dict{String,String},
+    taxa_labels::Dict{String,String}, classification::Any, gene::String)
+
+Checks if the classification from a LOOCV tree is correct.
+
+# Arguments
+- `taxa_label::String`: taxa to classify.
+- `character_labels::Dict{String,String}`: a mapping of the character labels to the corresponding sequences.
+- `taxa_labels::Dict{String,String}`: a mapping of the taxa labels to the character labels.
+- `classification::Any`: the classification to check.
+- `gene::String`: gene which is being classified.
+"""
 function check_CV_classification(taxa_label::String, character_labels::Dict{String,String}, taxa_labels::Dict{String,String}, classification::Any, gene::String)
 
     home_dir = "/users/jkatz/scratch/Desktop"
@@ -223,6 +277,27 @@ function check_CV_classification(taxa_label::String, character_labels::Dict{Stri
 end
 
 # Function to classify all sequences using CAOS and LOOCV
+"""
+    classify_all_CV(character_labels::Dict{String,String}, taxa_labels::Dict{String,String},
+    gene::String, percent_test::String ; blast_only::Bool=false,
+    all_CA_weights::Dict{Int64,Dict{String,Int64}}=Dict(1=>Dict("sPu"=>1,"sPr"=>1,"cPu"=>1,"cPr"=>1)),
+    occurrence_weighting::Bool=false, tiebreaker::Vector{Dict{String,Int64}}=[Dict{String,Int64}()],
+    downsample::Bool=false, combo_classification::Bool=false)
+
+Classifies all sequences using CAOS and LOOCV.
+
+# Arguments
+- `character_labels::Dict{String,String}`: a mapping of the character labels to the corresponding sequences.
+- `taxa_labels::Dict{String,String}`: a mapping of the taxa labels to the character labels.
+- `gene::String`: gene which is being classified.
+- `percent_test::String`: percent we are testing on.
+- `blast_only::Bool=false`: whether we are only using Blast to classify.
+- `all_CA_weights::Dict{Int64,Dict{String,Int64}}=Dict(1=>Dict("sPu"=>1,"sPr"=>1,"cPu"=>1,"cPr"=>1))`: CA weights to be used.
+- `occurrence_weighting::Bool=false`: whether to use occurence weighting in classification.
+- `tiebreaker::Vector{Dict{String,Int64}}=[Dict{String,Int64}()]`: tiebreaker to be used in classification.
+- `downsample::Bool=false`: whether we are using downsampling.
+- `combo_classification::Bool=false`: whether to use a combo of Blast and CAOS for classification.
+"""
 function classify_all_CV(character_labels::Dict{String,String}, taxa_labels::Dict{String,String}, gene::String, percent_test::String ; blast_only::Bool=false, all_CA_weights::Dict{Int64,Dict{String,Int64}}=Dict(1=>Dict("sPu"=>1,"sPr"=>1,"cPu"=>1,"cPr"=>1)), occurrence_weighting::Bool=false, tiebreaker::Vector{Dict{String,Int64}}=[Dict{String,Int64}()], downsample::Bool=false, combo_classification::Bool=false)
 
     home_dir = "/users/jkatz/scratch/Desktop"

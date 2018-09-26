@@ -2,7 +2,7 @@
     Rule(idxs::Tuple{Vararg{Int}}, char_attr::Tuple{Vararg{Char}},
     is_pure::Bool, num_group::Int, num_non_group::Int, occurances::Int)
 
-Struct to store relevant information about a CA
+Struct to store relevant information about a CA.
 """
 struct Rule
     idxs::Tuple{Vararg{Int}}
@@ -16,7 +16,7 @@ end
 """
     Node(CAs::Array{Rule,1}, taxa_label::String="")
 
-Struct to store a node (is recursive)
+Struct to store a node (is recursive).
 """
 struct Node
     CAs::Array{Rule,1}
@@ -31,7 +31,7 @@ end
 """
     remove_from_tree!(tree_tokens::Vector{String}, taxa_to_remove::Union{Array{String,1},Bool})
 
-Takes a tree in Newick format, removes a specific taxa
+Takes a tree in Newick format, removes a specific taxa from the tree.
 
 # Arguments
 - `tree_tokens::Vector{String}`: the tree in Newick format, tokenized.
@@ -88,7 +88,7 @@ end
 """
     get_nodes(tree::String ; taxa_to_remove::Union{Array{String,1},Bool}=false)
 
-Takes a tree in Newick format, returns an internal representation of the tree
+Takes a tree in Newick format, returns an internal representation of the tree.
 
 # Arguments
 - `tree::String`: the tree in Newick format.
@@ -159,7 +159,7 @@ end
 """
     parse_tree(file_path::String; taxa_to_remove::Union{Array{String,1},Bool}=false)
 
-Takes a Nexus file for a tree, returns an internal representation of that tree (and other relevant information)
+Takes a Nexus file for a tree, returns an internal representation of that tree (and other relevant information).
 
 # Arguments
 - `file_path::String`: file path to the Nexus file.
@@ -244,13 +244,12 @@ function parse_tree(file_path::String; taxa_to_remove::Union{Array{String,1},Boo
     return nodes, taxa_labels, character_labels, name
 end
 
-# Function to get all the CA's from all the nodes of a tree into proper format
 """
     add_nodes!(tree::Node,sPu::Array{Dict{String,Any}},sPr::Array{Dict{String,Any}},
     cPu::Array{Dict{String,Any}},cPr::Array{Dict{String,Any}},taxa_labels::Dict{String,String},
     character_labels::Dict{String,String},nodes::Array{Dict{String,Any}},node_num::Int64;complex::Bool=true)
 
-Takes a tree (Node), adds all the CA's from the entire tree into the internal representation
+Takes a tree (Node), adds all the CA's from the entire tree into the internal representation.
 
 # Arguments
 - `tree::Node`: the tree represented as a Node.
