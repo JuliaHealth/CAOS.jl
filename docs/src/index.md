@@ -1,4 +1,4 @@
-## Characteristic Attribute Organization System (CAOS).
+# Characteristic Attribute Organization System (CAOS).
 
 The three functions provided by this package are located in the `user_functions.jl` file. This file also leverages helper functions from the files: `caos_functions.jl`, `tree_functions.jl` ,` utils.jl`, `classification.jl`, `gap_imputation.jl`.
 
