@@ -250,6 +250,8 @@
     
     <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
     
+      
+    
     
       <label class="md-nav__link md-nav__link--active" for="__toc">
         Home
@@ -263,41 +265,30 @@
 <nav class="md-nav md-nav--secondary">
   
   
+    
+  
   
     <label class="md-nav__title" for="__toc">Table of contents</label>
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#characteristic-attribute-organization-system-caos" title="Characteristic Attribute Organization System (CAOS)." class="md-nav__link">
-    Characteristic Attribute Organization System (CAOS).
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
   <a href="#generate-caos-rules-from-a-phylogenetic-tree-writes-caos-rule-files-to-the-output-directory" title="Generate CAOS rules from a phylogenetic tree, writes CAOS rule files to the output directory." class="md-nav__link">
     Generate CAOS rules from a phylogenetic tree, writes CAOS rule files to the output directory.
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
+      
+        <li class="md-nav__item">
   <a href="#classify-a-sequence-using-caos-rules-already-generated-writes-the-classification-label-to-file-in-the-output-directory" title="Classify a sequence using CAOS rules already generated, writes the classification label to file in the output directory." class="md-nav__link">
     Classify a sequence using CAOS rules already generated, writes the classification label to file in the output directory.
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
+      
+        <li class="md-nav__item">
   <a href="#function-to-read-tree-information-from-file" title="Function to read tree information from file" class="md-nav__link">
     Function to read tree information from file
   </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -345,41 +336,30 @@
 <nav class="md-nav md-nav--secondary">
   
   
+    
+  
   
     <label class="md-nav__title" for="__toc">Table of contents</label>
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#characteristic-attribute-organization-system-caos" title="Characteristic Attribute Organization System (CAOS)." class="md-nav__link">
-    Characteristic Attribute Organization System (CAOS).
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
   <a href="#generate-caos-rules-from-a-phylogenetic-tree-writes-caos-rule-files-to-the-output-directory" title="Generate CAOS rules from a phylogenetic tree, writes CAOS rule files to the output directory." class="md-nav__link">
     Generate CAOS rules from a phylogenetic tree, writes CAOS rule files to the output directory.
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
+      
+        <li class="md-nav__item">
   <a href="#classify-a-sequence-using-caos-rules-already-generated-writes-the-classification-label-to-file-in-the-output-directory" title="Classify a sequence using CAOS rules already generated, writes the classification label to file in the output directory." class="md-nav__link">
     Classify a sequence using CAOS rules already generated, writes the classification label to file in the output directory.
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
+      
+        <li class="md-nav__item">
   <a href="#function-to-read-tree-information-from-file" title="Function to read tree information from file" class="md-nav__link">
     Function to read tree information from file
   </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -409,10 +389,8 @@
                   <a href="https://github.com/bcbi/CAOS.jl/edit/master/docs/index.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
                 
                 
-                  <h1>Home</h1>
-                
                 <p><a id='Characteristic-Attribute-Organization-System-(CAOS).-1'></a></p>
-<h2 id="characteristic-attribute-organization-system-caos">Characteristic Attribute Organization System (CAOS).</h2>
+<h1 id="characteristic-attribute-organization-system-caos">Characteristic Attribute Organization System (CAOS).</h1>
 <p>The three functions provided by this package are located in the <code>user_functions.jl</code> file. This file also leverages helper functions from the files: <code>caos_functions.jl</code>, <code>tree_functions.jl</code> ,<code>utils.jl</code>, <code>classification.jl</code>, <code>gap_imputation.jl</code>.</p>
 <p>To use this package to classify a sequence, first run the <code>generate_caos_rules</code> function on your tree in the required NEXUS format. This will create the necessary CAOS rules and files to use for classification. If you don't have the output from <code>generate_caos_rules</code> in your working environment, run <code>load_tree</code> to read in the necessary tree files. Next run the <code>classify_new_sequence</code> function on the sequence you wish to classify.</p>
 <p><a id='Generate-CAOS-rules-from-a-phylogenetic-tree,-writes-CAOS-rule-files-to-the-output-directory.-1'></a></p>
