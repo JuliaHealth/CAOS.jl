@@ -1,0 +1,24 @@
+site_name:        CAOS.jl
+site_author:      Jason Katz
+repo_url:         https://github.com/bcbi/CAOS.jl
+site_description: Characteristic Attribute Organization System (CAOS) implementation in Julia.
+site_author:      bcbi
+
+theme:
+  name: 'material'
+  palette:
+    primary: 'red'
+    accent: 'pink'
+  # logo: 'images/bcbi_logo.jpeg'
+
+markdown_extensions:
+  - extra
+  - tables
+  - fenced_code
+  - codehilite
+
+docs_dir: 'build'
+
+pages:
+- Home: index.md
+- Manual: documentation.md
