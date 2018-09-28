@@ -3,11 +3,9 @@ language: julia
 
 os:
   - linux
-  - osx
 
 julia:
   - 0.7
-  - 1.0
 
 notifications:
   email: false
@@ -35,6 +33,6 @@ jobs:
     - stage: deploy docs
       language: julia
       os: linux
-      julia: 1.0
+      julia: 0.7
       script:
         - julia -e 'import Pkg; Pkg.instantiate(); Pkg.add("Documenter"); include(joinpath("docs", "make.jl"))'

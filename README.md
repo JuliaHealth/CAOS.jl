@@ -1,6 +1,6 @@
 # CAOS
 
-*Package for using the CAOS algorithm in Julia*  
+#### Characteristic Attribute Organization System (CAOS) implementation in Julia.
 
 
 | MacOS / Linux | Windows | Test Coverage | Documentation |
