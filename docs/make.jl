@@ -17,7 +17,7 @@ using Documenter, CAOS
 makedocs()
 
 deploydocs(
-    deps   = Deps.pip("mkdocs", "mkdocs-material"),
+    deps   = Deps.pip("mkdocs==1", "mkdocs-material==3.0.3"),
     repo = "github.com/bcbi/CAOS.jl.git",
     julia  = "0.7",
     osname = "linux"
