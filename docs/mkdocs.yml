@@ -21,4 +21,4 @@ docs_dir: 'build'
 
 pages:
 - Home: index.md
-- Manual: documentation.md
+- Functions: documentation.md
