@@ -415,9 +415,9 @@
 <h2 id="nexus-file-format">NEXUS File Format</h2>
 <p>In order for the parser to correctly extract all relevant information from your phylogeneitc tree, your NEXUS file must be in the exact format described below (most NEXUS files will already be in this format, but if you are having issues with your file being read properly, here is how to format it):</p>
 <ul>
-<li>The tree must in Newick format (only parentheses, commas, and numbers)</li>
-<li>The tree must be on a line with the words "TREE" and "=", and only contain parentheses as part of the Newick representation</li>
-<li>The character labels (names associated with each sequence of characters) should be exactly 3 lines beneath a line with the word "MATRIX" (this should be the only time the word "MATRIX" appears in the file)</li>
+<li>The tree must in Newick format</li>
+<li>The tree must be on a line with the words "TREE" and "="</li>
+<li>The character labels (names associated with each sequence of characters) should be directly after a line with the word "MATRIX" (this should be the only time the word "MATRIX" appears in the file)</li>
 <li>Each character label should be its own line, with the name followed by a number of space, and then the character sequence</li>
 <li>After your last character label, the following line should contain only a ";"</li>
 <li>Taxa labels (taxa numbers for the position in the newick formatted tree associated with each character sequence name) should appear directly after a line containing the word "TRANSLATE" (this should be the only occurrence of that word in the file)</li>
