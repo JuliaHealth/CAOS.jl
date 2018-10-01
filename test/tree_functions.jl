@@ -33,18 +33,6 @@ using Tokenize
         @test !haskey(taxa_labels, "45")
         @test !haskey(character_labels, "Tubificoides_imajimai_CE536")
         @test !haskey(character_labels, "Tubificoides_benedii_II_CE2692")
-
-        # tree, character_labels, taxa_labels = generate_caos_rules("data/S10593.nex", "data/output")
-        #
-        # @test typeof(tree) == CAOS.Node
-
-        # classification = classify_new_sequence(tree, character_labels, taxa_labels, "/data/Example_Sequence.txt", "/data/output")
-
-        # @test typeof(classification) == String
-
-        # tree2, character_labels2, taxa_labels2 = load_tree("data/output")
-        #
-        # @test typeof(tree2) == CAOS.Node
     end
 
     @testset "parse_tree format 2" begin

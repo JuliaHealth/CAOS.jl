@@ -130,7 +130,7 @@ function classify_sequence(sequence::String, tree::Node, CA_weights::Dict{String
             push!(child_CA_score, CA_matches(sequence, child.CAs, CA_weights, occurrence_weighting))
         end
 
-        max_child_idx = find(score -> score == maximum(child_CA_score), child_CA_score)
+        max_child_idx = findall(score -> score == maximum(child_CA_score), child_CA_score)
 
         # Select the child with highest CA score and descend in that direction
         if length(max_child_idx) == 1

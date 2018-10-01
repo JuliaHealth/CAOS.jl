@@ -1,6 +1,7 @@
 module CAOS
 
 using BioTools
+using BioTools.BLAST
 using BioSequences
 using JSON
 using FastaIO

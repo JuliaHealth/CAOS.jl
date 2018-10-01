@@ -7,7 +7,7 @@ module TestCAOS
         ("tree_functions.jl",   "           Testing: Tree functions"),
     #    ("gap_imputation.jl",     "       Testing: Gap imputation"),
     #    ("classification.jl",     "       Testing: Classification"),
-    #    ("user_functions.jl",     "       Testing: User functions"),
+        ("user_functions.jl",     "       Testing: User functions"),
     #    ("caos_functions.jl",     "       Testing: CAOS functions"),
         ("utils.jl",     "       Testing: Utils")
 

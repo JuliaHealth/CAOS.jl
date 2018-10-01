@@ -238,7 +238,7 @@ function get_best_hit(results::Array{BioTools.BLAST.BLASTResult,1}, query::Strin
             query_front = query[1:query_start-1]
             subject_back = subject[subj_start:end]
             query_back = query[query_start:end]
-            lost_characters = abs(length(replace(subject_front, "-", "")) - length(query_front)) + abs(length(replace(subject_back, "-", "")) - length(query_back))
+            lost_characters = abs(length(replace(subject_front, "-" => "")) - length(query_front)) + abs(length(replace(subject_back, "-" => "")) - length(query_back))
             push!(error, lost_characters)
         catch
             push!(error, 1000000)
@@ -246,7 +246,7 @@ function get_best_hit(results::Array{BioTools.BLAST.BLASTResult,1}, query::Strin
     end
 
     # Return the reuslt which minimizes the number of characters lost from the new alignment
-    return results[indmin(error)]
+    return results[argmin(error)]
 end
 
 """
@@ -271,7 +271,7 @@ function add_blanks(query_path::String, db_path::String, character_labels::Dict{
     # Read in the query sequence from file
     query = ""
     for line in readlines(query_path)
-        if contains(line, ">")
+        if occursin(">", line)
             continue
         end
         query = query * line
@@ -300,7 +300,7 @@ function add_blanks(query_path::String, db_path::String, character_labels::Dict{
     subject_no_gaps = character_labels_no_gaps[best_result.hitname]
 
     # Convert the best hit to a string and remove gaps that blast added
-    best_hit = replace(convert(String, best_result.hit), "-", "")
+    best_hit = replace(convert(String, best_result.hit), "-" => "")
 
     # Get the starting position of the matched subject
     try
@@ -316,7 +316,7 @@ function add_blanks(query_path::String, db_path::String, character_labels::Dict{
     subj_start = get_adjusted_start(orig_subj_start, subject)
 
     # Convert the best hit to a string and remove gaps that blast added
-    blast_alignment = replace(convert(String, best_result.alignment.seq), "-", "")
+    blast_alignment = replace(convert(String, best_result.alignment.seq), "-" => "")
 
     # Get the starting position of the query
     query_start = match(Regex(blast_alignment), query).offset
@@ -328,8 +328,8 @@ function add_blanks(query_path::String, db_path::String, character_labels::Dict{
     query_back = query[query_start:end]
 
     # Return the query sequence with blanks added to the front and back
-    new_seq = add_blanks_to_front(subject_front, query_front, "", subj_start-1, query_start-1, length(replace(subject_front, "-", "")), hitnames, 1, character_labels) *
-    add_blanks_to_back(subject_back, query_back, "", length(subject_back), length(query_back), length(replace(subject_back, "-", "")), hitnames, 1, character_labels)
+    new_seq = add_blanks_to_front(subject_front, query_front, "", subj_start-1, query_start-1, length(replace(subject_front, "-" => "")), hitnames, 1, character_labels) *
+    add_blanks_to_back(subject_back, query_back, "", length(subject_back), length(query_back), length(replace(subject_back, "-" => "")), hitnames, 1, character_labels)
 
     if return_blast
         return new_seq, hitnames

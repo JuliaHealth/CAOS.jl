@@ -90,7 +90,7 @@ function classify_new_sequence(tree::Node, character_labels::Dict{String,String}
     character_labels_no_gaps = remove_blanks(character_labels)
 
     # Get the new sequence after imputing blanks
-    new_seq,blast_results = add_blanks("$sequence_file_path", "$output_directory/char_labels.fasta", character_labels, character_labels_no_gaps, return_blast=true)
+    new_seq, blast_results = add_blanks("$sequence_file_path", "$output_directory/char_labels.fasta", character_labels, character_labels_no_gaps, return_blast=true)
 
     classification = classify_sequence(new_seq, tree, all_CA_weights[1], all_CA_weights, occurrence_weighting, 1, tiebreaker, blast_results=blast_results, combo_classification=combo_classification)
 
