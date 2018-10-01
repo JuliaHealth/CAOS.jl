@@ -1,51 +1,14 @@
 # Characteristic Attribute Organization System (CAOS).
 
-The three functions provided by this package are located in the `user_functions.jl` file. This file also leverages helper functions from the files: `caos_functions.jl`, `tree_functions.jl` ,` utils.jl`, `classification.jl`, `gap_imputation.jl`.
+This package provides an interface to use the CAOS algorithm for sequence classification. 
 
-To use this package to classify a sequence, first run the `generate_caos_rules` function on your tree in the required NEXUS format. This will create the necessary CAOS rules and files to use for classification. If you don't have the output from `generate_caos_rules` in your working environment, run `load_tree` to read in the necessary tree files. Next run the `classify_new_sequence` function on the sequence you wish to classify.
+#### Workflow
 
-#### Generate CAOS rules from a phylogenetic tree, writes CAOS rule files to the output directory.
-```julia
-generate_caos_rules(tree_file_path::String, output_directory::String)
-```
+* First run the `generate_caos_rules` function on your tree in the required NEXUS format. This will create the necessary CAOS rules and files to use for classification.
 
-* `tree_file_path` : The path leading to the NEXUS file containing the phylogentic tree to be used to create CAOS rules. The exact format of the NEXUS file is described below.
+* Once you have generated your CAOS rules, you can load them with the function `load_tree`.
 
-* `output_directory` : The directory which will contain all files pertaining to CAOS rules and classification
-
-* The function returns the tree with all CAOS rules as a Node object, as well as the character and taxa label dictionaries. It will also write 7 files to the output directory: `caos_rules.json` contains all the CAOS rules for the tree, `character_labels.json` and `taxa_labels.json` contain information connecting sequences to names and locations in the tree (internal use), and the 4 `.fasta` files will be utilized later for sequence alignment using BLAST during classification.
-
-#### Classify a sequence using CAOS rules already generated, writes the classification label to file in the output directory.
-```julia
-classify_new_sequence(tree::Node, character_labels::Dict{String,String}, taxa_labels::Dict{String,String}, sequence_file_path::String, output_directory::String ; all_CA_weights::Dict{Int64,Dict{String,Int64}}=Dict(1=>Dict("sPu"=>1,"sPr"=>1,"cPu"=>1,"cPr"=>1)), occurrence_weighting::Bool=false, tiebreaker::Vector{Dict{String,Int64}}=[Dict{String,Int64}()])
-```
-
-* `tree` : A Node object containing the tree with all CAOS rules
-
-* `character_labels` : A dictionary containing the character labels with the associated sequences
-
-* `taxa_labels` : A dictionary containing the taxa labels with the associated sequence names
-
-* `sequence_file_path` : The path leading to the text file containing the sequence you wish to classify. The file should only contain the characters of the sequence
-
-* `output_directory` : The directory which contains all files pertaining to CAOS rules and classification
-
-* `all_CA_weights` : An optional argument for the weights to be given to different types of CA's (default is all 1)
-
-* `occurrence_weighting` : An optional argument for whether to use occurrence weighting for private rules (default is false)
-
-* `tiebreaker` : An optional argument for whether to use a tiebreaker (next set of CA weights), or return the entire subtree
-
-* This functions returns the classification result. Either a string with the classification label or a Node object (under classifiction) will be returned.
-
-#### Function to read tree information from file
-```julia
-load_tree(directory::String)
-```
-
-* `directory` : The directory where the CAOS rules and character and taxa labels are saved
-
-* The function returns the tree with all CAOS rules as a Node object, as well as the character and taxa label dictionaries.
+* Lastly run the `classify_new_sequence` function on the sequence you wish to classify.
 
 ## NEXUS File Format
 
