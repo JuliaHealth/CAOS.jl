@@ -4,7 +4,7 @@
 
 
 | MacOS / Linux | Windows | Test Coverage | Documentation | Lifecycle |
-| --- | ---- | ------ | ------ |
+| --- | ---- | ------ | ------ | ---- |
 |[![Travis](https://img.shields.io/travis/bcbi/CAOS.jl/master.svg?style=flat-square)](https://travis-ci.org/bcbi/CAOS.jl)| [![AppVeyor](https://img.shields.io/appveyor/ci/fernandogelin/CAOS-jl/master.svg?style=flat-square)](https://ci.appveyor.com/project/fernandogelin/caos-jl) | [![Codecov](https://img.shields.io/codecov/c/github/bcbi/CAOS.jl.svg?style=flat-square)](https://codecov.io/gh/bcbi/CAOS.jl/branch/master) | [![Docs](https://img.shields.io/badge/docs-stable-blue.svg?style=flat-square)](https://bcbi.github.io/CAOS.jl/stable) [![Docs](https://img.shields.io/badge/docs-latest-blue.svg?style=flat-square)](https://bcbi.github.io/CAOS.jl/latest) | ![Lifecycle](https://img.shields.io/badge/lifecycle-maturing-blue.svg?style=flat-square) |
 
 ## Installation
