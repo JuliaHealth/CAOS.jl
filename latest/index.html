@@ -272,22 +272,8 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#generate-caos-rules-from-a-phylogenetic-tree-writes-caos-rule-files-to-the-output-directory" title="Generate CAOS rules from a phylogenetic tree, writes CAOS rule files to the output directory." class="md-nav__link">
-    Generate CAOS rules from a phylogenetic tree, writes CAOS rule files to the output directory.
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#classify-a-sequence-using-caos-rules-already-generated-writes-the-classification-label-to-file-in-the-output-directory" title="Classify a sequence using CAOS rules already generated, writes the classification label to file in the output directory." class="md-nav__link">
-    Classify a sequence using CAOS rules already generated, writes the classification label to file in the output directory.
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#function-to-read-tree-information-from-file" title="Function to read tree information from file" class="md-nav__link">
-    Function to read tree information from file
+  <a href="#workflow" title="Workflow" class="md-nav__link">
+    Workflow
   </a>
   
 </li>
@@ -343,22 +329,8 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#generate-caos-rules-from-a-phylogenetic-tree-writes-caos-rule-files-to-the-output-directory" title="Generate CAOS rules from a phylogenetic tree, writes CAOS rule files to the output directory." class="md-nav__link">
-    Generate CAOS rules from a phylogenetic tree, writes CAOS rule files to the output directory.
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#classify-a-sequence-using-caos-rules-already-generated-writes-the-classification-label-to-file-in-the-output-directory" title="Classify a sequence using CAOS rules already generated, writes the classification label to file in the output directory." class="md-nav__link">
-    Classify a sequence using CAOS rules already generated, writes the classification label to file in the output directory.
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#function-to-read-tree-information-from-file" title="Function to read tree information from file" class="md-nav__link">
-    Function to read tree information from file
+  <a href="#workflow" title="Workflow" class="md-nav__link">
+    Workflow
   </a>
   
 </li>
@@ -391,45 +363,13 @@
                 
                 <p><a id='Characteristic-Attribute-Organization-System-(CAOS).-1'></a></p>
 <h1 id="characteristic-attribute-organization-system-caos">Characteristic Attribute Organization System (CAOS).</h1>
-<p>The three functions provided by this package are located in the <code>user_functions.jl</code> file. This file also leverages helper functions from the files: <code>caos_functions.jl</code>, <code>tree_functions.jl</code> ,<code>utils.jl</code>, <code>classification.jl</code>, <code>gap_imputation.jl</code>.</p>
-<p>To use this package to classify a sequence, first run the <code>generate_caos_rules</code> function on your tree in the required NEXUS format. This will create the necessary CAOS rules and files to use for classification. If you don't have the output from <code>generate_caos_rules</code> in your working environment, run <code>load_tree</code> to read in the necessary tree files. Next run the <code>classify_new_sequence</code> function on the sequence you wish to classify.</p>
-<p><a id='Generate-CAOS-rules-from-a-phylogenetic-tree,-writes-CAOS-rule-files-to-the-output-directory.-1'></a></p>
-<h4 id="generate-caos-rules-from-a-phylogenetic-tree-writes-caos-rule-files-to-the-output-directory">Generate CAOS rules from a phylogenetic tree, writes CAOS rule files to the output directory.</h4>
-<div class="codehilite"><pre><span></span><span class="n">generate_caos_rules</span><span class="p">(</span><span class="n">tree_file_path</span><span class="o">::</span><span class="n">String</span><span class="p">,</span> <span class="n">output_directory</span><span class="o">::</span><span class="n">String</span><span class="p">)</span>
-</pre></div>
-
-
+<p>This package provides an interface to use the CAOS algorithm for sequence classification. </p>
+<p><a id='Workflow-1'></a></p>
+<h4 id="workflow">Workflow</h4>
 <ul>
-<li><code>tree_file_path</code> : The path leading to the NEXUS file containing the phylogentic tree to be used to create CAOS rules. The exact format of the NEXUS file is described below.</li>
-<li><code>output_directory</code> : The directory which will contain all files pertaining to CAOS rules and classification</li>
-<li>The function returns the tree with all CAOS rules as a Node object, as well as the character and taxa label dictionaries. It will also write 7 files to the output directory: <code>caos_rules.json</code> contains all the CAOS rules for the tree, <code>character_labels.json</code> and <code>taxa_labels.json</code> contain information connecting sequences to names and locations in the tree (internal use), and the 4 <code>.fasta</code> files will be utilized later for sequence alignment using BLAST during classification.</li>
-</ul>
-<p><a id='Classify-a-sequence-using-CAOS-rules-already-generated,-writes-the-classification-label-to-file-in-the-output-directory.-1'></a></p>
-<h4 id="classify-a-sequence-using-caos-rules-already-generated-writes-the-classification-label-to-file-in-the-output-directory">Classify a sequence using CAOS rules already generated, writes the classification label to file in the output directory.</h4>
-<div class="codehilite"><pre><span></span><span class="n">classify_new_sequence</span><span class="p">(</span><span class="n">tree</span><span class="o">::</span><span class="n">Node</span><span class="p">,</span> <span class="n">character_labels</span><span class="o">::</span><span class="kt">Dict</span><span class="p">{</span><span class="n">String</span><span class="p">,</span><span class="n">String</span><span class="p">},</span> <span class="n">taxa_labels</span><span class="o">::</span><span class="kt">Dict</span><span class="p">{</span><span class="n">String</span><span class="p">,</span><span class="n">String</span><span class="p">},</span> <span class="n">sequence_file_path</span><span class="o">::</span><span class="n">String</span><span class="p">,</span> <span class="n">output_directory</span><span class="o">::</span><span class="n">String</span> <span class="p">;</span> <span class="n">all_CA_weights</span><span class="o">::</span><span class="kt">Dict</span><span class="p">{</span><span class="kt">Int64</span><span class="p">,</span><span class="kt">Dict</span><span class="p">{</span><span class="n">String</span><span class="p">,</span><span class="kt">Int64</span><span class="p">}}</span><span class="o">=</span><span class="kt">Dict</span><span class="p">(</span><span class="mi">1</span><span class="o">=&gt;</span><span class="kt">Dict</span><span class="p">(</span><span class="s">&quot;sPu&quot;</span><span class="o">=&gt;</span><span class="mi">1</span><span class="p">,</span><span class="s">&quot;sPr&quot;</span><span class="o">=&gt;</span><span class="mi">1</span><span class="p">,</span><span class="s">&quot;cPu&quot;</span><span class="o">=&gt;</span><span class="mi">1</span><span class="p">,</span><span class="s">&quot;cPr&quot;</span><span class="o">=&gt;</span><span class="mi">1</span><span class="p">)),</span> <span class="n">occurrence_weighting</span><span class="o">::</span><span class="kt">Bool</span><span class="o">=</span><span class="kc">false</span><span class="p">,</span> <span class="n">tiebreaker</span><span class="o">::</span><span class="kt">Vector</span><span class="p">{</span><span class="kt">Dict</span><span class="p">{</span><span class="n">String</span><span class="p">,</span><span class="kt">Int64</span><span class="p">}}</span><span class="o">=</span><span class="p">[</span><span class="kt">Dict</span><span class="p">{</span><span class="n">String</span><span class="p">,</span><span class="kt">Int64</span><span class="p">}()])</span>
-</pre></div>
-
-
-<ul>
-<li><code>tree</code> : A Node object containing the tree with all CAOS rules</li>
-<li><code>character_labels</code> : A dictionary containing the character labels with the associated sequences</li>
-<li><code>taxa_labels</code> : A dictionary containing the taxa labels with the associated sequence names</li>
-<li><code>sequence_file_path</code> : The path leading to the text file containing the sequence you wish to classify. The file should only contain the characters of the sequence</li>
-<li><code>output_directory</code> : The directory which contains all files pertaining to CAOS rules and classification</li>
-<li><code>all_CA_weights</code> : An optional argument for the weights to be given to different types of CA's (default is all 1)</li>
-<li><code>occurrence_weighting</code> : An optional argument for whether to use occurrence weighting for private rules (default is false)</li>
-<li><code>tiebreaker</code> : An optional argument for whether to use a tiebreaker (next set of CA weights), or return the entire subtree</li>
-<li>This functions returns the classification result. Either a string with the classification label or a Node object (under classifiction) will be returned.</li>
-</ul>
-<p><a id='Function-to-read-tree-information-from-file-1'></a></p>
-<h4 id="function-to-read-tree-information-from-file">Function to read tree information from file</h4>
-<div class="codehilite"><pre><span></span><span class="n">load_tree</span><span class="p">(</span><span class="n">directory</span><span class="o">::</span><span class="n">String</span><span class="p">)</span>
-</pre></div>
-
-
-<ul>
-<li><code>directory</code> : The directory where the CAOS rules and character and taxa labels are saved</li>
-<li>The function returns the tree with all CAOS rules as a Node object, as well as the character and taxa label dictionaries.</li>
+<li>First run the <code>generate_caos_rules</code> function on your tree in the required NEXUS format. This will create the necessary CAOS rules and files to use for classification.</li>
+<li>Once you have generated your CAOS rules, you can load them with the function <code>load_tree</code>.</li>
+<li>Lastly run the <code>classify_new_sequence</code> function on the sequence you wish to classify.</li>
 </ul>
 <p><a id='NEXUS-File-Format-1'></a></p>
 <h2 id="nexus-file-format">NEXUS File Format</h2>
