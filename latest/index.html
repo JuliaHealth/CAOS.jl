@@ -285,6 +285,26 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#examples" title="Examples" class="md-nav__link">
+    Examples
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#functions" title="Functions" class="md-nav__link">
+    Functions
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
       
       
       
@@ -342,6 +362,26 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#examples" title="Examples" class="md-nav__link">
+    Examples
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#functions" title="Functions" class="md-nav__link">
+    Functions
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
       
       
       
@@ -365,7 +405,7 @@
 <h1 id="characteristic-attribute-organization-system-caos">Characteristic Attribute Organization System (CAOS).</h1>
 <p>This package provides an interface to use the CAOS algorithm for sequence classification. </p>
 <p><a id='Workflow-1'></a></p>
-<h4 id="workflow">Workflow</h4>
+<h2 id="workflow">Workflow</h2>
 <ul>
 <li>First run the <code>generate_caos_rules</code> function on your tree in the required NEXUS format. This will create the necessary CAOS rules and files to use for classification.</li>
 <li>Once you have generated your CAOS rules, you can load them with the function <code>load_tree</code>.</li>
@@ -384,8 +424,27 @@
 <li>Each taxa label should be its own line, with the taxa number followed by the character sequence name (at least one space in between the two)</li>
 <li>The line with the last taxa label should end with a ";"</li>
 </ul>
-<p>An example NEXUS file is provided in the repository : <code>S10593.nex</code></p>
-<p>An example sequence file is provided in the repository : <code>Example_Sequence.txt</code></p>
+<p><a id='Examples-1'></a></p>
+<h2 id="examples">Examples</h2>
+<p>Two example NEXUS files are provided in the <code>test/data</code> folder : <code>S10593.nex</code> and <code>E1E2L1.nex</code></p>
+<p>An example sequence file is provided in the <code>test/data</code> folder : <code>Example_Sequence.txt</code></p>
+<p><a id='Functions-1'></a></p>
+<h4 id="functions">Functions</h4>
+<div class="codehilite"><pre><span></span>generate_caos_rules(&quot;test/data/S10593.nex&quot;, &quot;test/data&quot;)
+</pre></div>
+
+
+<p>This will generate your CAOS rules for the tree in the <code>S10593.nex</code> NEXUS file and place all output files from rule generation in the <code>test/data</code> directory.</p>
+<div class="codehilite"><pre><span></span>tree, character_labels, taxa_labels = load_tree(&quot;test/data&quot;)
+</pre></div>
+
+
+<p>This will load the internal representation of the tree and CAOS rules from the files output during rule generation in the <code>test/data</code> directory. </p>
+<div class="codehilite"><pre><span></span><span class="n">classification</span> = <span class="n">classify_new_sequence</span>(<span class="n">tree</span>, <span class="n">character_labels</span>, <span class="n">taxa_labels</span>, <span class="s">&quot;test/data/Example_Sequence.txt&quot;</span>, <span class="s">&quot;test/data&quot;</span>)
+</pre></div>
+
+
+<p>This will return the classification result, either a string with the classification label or a Node object (under classifiction).</p>
                 
                   
                 
