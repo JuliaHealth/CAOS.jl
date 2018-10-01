@@ -2,7 +2,7 @@
 
 This package provides an interface to use the CAOS algorithm for sequence classification. 
 
-#### Workflow
+## Workflow
 
 * First run the `generate_caos_rules` function on your tree in the required NEXUS format. This will create the necessary CAOS rules and files to use for classification.
 
@@ -23,6 +23,27 @@ In order for the parser to correctly extract all relevant information from your 
 * Each taxa label should be its own line, with the taxa number followed by the character sequence name (at least one space in between the two)
 * The line with the last taxa label should end with a ";"
 
-An example NEXUS file is provided in the repository : `S10593.nex`
+## Examples
 
-An example sequence file is provided in the repository : `Example_Sequence.txt`
+Two example NEXUS files are provided in the `test/data` folder : `S10593.nex` and `E1E2L1.nex`
+
+An example sequence file is provided in the `test/data` folder : `Example_Sequence.txt`
+
+#### Functions
+
+```
+generate_caos_rules("test/data/S10593.nex", "test/data")
+```
+This will generate your CAOS rules for the tree in the `S10593.nex` NEXUS file and place all output files from rule generation in the `test/data` directory.
+
+```
+tree, character_labels, taxa_labels = load_tree("test/data")
+```
+This will load the internal representation of the tree and CAOS rules from the files output during rule generation in the `test/data` directory. 
+
+```
+classification = classify_new_sequence(tree, character_labels, taxa_labels, "test/data/Example_Sequence.txt", "test/data")
+```
+This will return the classification result, either a string with the classification label or a Node object (under classifiction).
+
+
