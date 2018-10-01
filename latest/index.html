@@ -272,6 +272,13 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#caos-publications" title="CAOS Publications" class="md-nav__link">
+    CAOS Publications
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#workflow" title="Workflow" class="md-nav__link">
     Workflow
   </a>
@@ -349,6 +356,13 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#caos-publications" title="CAOS Publications" class="md-nav__link">
+    CAOS Publications
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#workflow" title="Workflow" class="md-nav__link">
     Workflow
   </a>
@@ -401,9 +415,16 @@
                   <a href="https://github.com/bcbi/CAOS.jl/edit/master/docs/index.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
                 
                 
-                <p><a id='Characteristic-Attribute-Organization-System-(CAOS).-1'></a></p>
-<h1 id="characteristic-attribute-organization-system-caos">Characteristic Attribute Organization System (CAOS).</h1>
-<p>This package provides an interface to use the CAOS algorithm for sequence classification. </p>
+                <p><a id='Characteristic-Attribute-Organization-System-(CAOS)-1'></a></p>
+<h1 id="characteristic-attribute-organization-system-caos">Characteristic Attribute Organization System (CAOS)</h1>
+<p>This package provides an interface to use the CAOS algorithm for sequence classification.</p>
+<p>In an ideal world, a full phylogenetic analysis would be done on every new sequence found. However, this is often a time-consuming and computer-intensive task. The Characteristic Attribute Organization System (CAOS) is an algorithm to discover descriptive information about <em>a priori</em> organized discretized data (<em>e.g.</em>, from a phylogenetic analysis). Derived from some of the fundamental tenets from evolutionary biology, rule sets can be generated from data sets that can be used for effecicient and effective classification of novel data elements. It's important to emphasize that CAOS is NOT a tree analysis, instead it is a classification scheme based on a phylogenetic analysis. Based on information (rules) discovered from the phylogenetic analysis that unambiguously distinguish between each node on a tree, CAOS is able to classify novel sequences. Studies have indicated that CAOS-based classification has over a 95% accuracy rate of classification, as determined by where sequences would be classified if a full phylogenetic analysis were to be done using the novel and known sequences.</p>
+<p>CAOS.jl is an implementation of the CAOS approach designed to approximate a parsimony-based tree analysis. This tool computes diagnostic character states from phylogenetic trees and uses them for classification of new molecular sequences.</p>
+<blockquote>
+<h5 id="caos-publications">CAOS Publications</h5>
+<p>Sarkar IN, Thornton JW, Planet PJ, Figurski DH, Schierwater B, and DeSalle R. <em>An Autotmated Phylogenetic Key for Classifying Homoboxes.</em> Molecular Genetics and Evolution (2002) 24: 388-399.    <a href="https://doi.org/10.1016/S1055-7903%2802%2900259-2"><img alt="DOI" src="https://img.shields.io/badge/DOI-10.1016%2FS1055--7903%2802%2900259--2-purple.svg?style=flat-square" /></a>  </p>
+<p>Sarkar IN, Planet PJ, and DeSalle R. <em>caos software for use in character‐based DNA barcoding</em>. Molecular Ecology Resources (2008) 8, 1256-1259.    <a href="https://doi.org/10.1111/j.1755-0998.2008.02235.x"><img alt="DOI" src="https://img.shields.io/badge/DOI-10.1111%2Fj.1755--0998.2008.02235.x-purple.svg?style=flat-square" /></a></p>
+</blockquote>
 <p><a id='Workflow-1'></a></p>
 <h2 id="workflow">Workflow</h2>
 <ul>
@@ -439,7 +460,7 @@
 </pre></div>
 
 
-<p>This will load the internal representation of the tree and CAOS rules from the files output during rule generation in the <code>test/data</code> directory. </p>
+<p>This will load the internal representation of the tree and CAOS rules from the files output during rule generation in the <code>test/data</code> directory.</p>
 <div class="codehilite"><pre><span></span><span class="n">classification</span> = <span class="n">classify_new_sequence</span>(<span class="n">tree</span>, <span class="n">character_labels</span>, <span class="n">taxa_labels</span>, <span class="s">&quot;test/data/Example_Sequence.txt&quot;</span>, <span class="s">&quot;test/data&quot;</span>)
 </pre></div>
 
