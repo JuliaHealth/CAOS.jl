@@ -9,7 +9,10 @@ theme:
   palette:
     primary: 'red'
     accent: 'pink'
-  logo: build/assets/bcbi-logo.svg
+  logo: 'bcbi_logo.svg'
+
+extra_css:
+  - assets/Documenter.css
 
 markdown_extensions:
   - extra
