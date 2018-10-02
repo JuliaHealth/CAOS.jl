@@ -11,7 +11,23 @@ Counts the number of CA's matched by a sequence (only support for simple rules).
 """
 function CA_matches(sequence::String, CAs::Vector{Rule}, CA_weights::Dict{String,Int64}, occurrence_weighting::Bool)
 
-    letter_transformations = Dict{Char,Vector{Char}}('A'=>['A'], 'T'=>['T'], 'C'=>['C'], 'G'=>['G'], 'U'=>['U'], 'R'=>['A','G'], 'Y'=>['C','T'], 'S'=>['G','C'], 'W'=>['A','T'], 'K'=>['G','T'], 'M'=>['A','C'], 'B'=>['C','G','T'], 'D'=>['A','G','T'], 'H'=>['A','C','T'], 'V'=>['A','C','G'], 'N'=>['A','T','C','G'], '-'=>['-'])
+    letter_transformations = Dict{Char,Vector{Char}}('A'=>['A'],
+                                                     'T'=>['T'],
+                                                     'C'=>['C'],
+                                                     'G'=>['G'],
+                                                     'U'=>['U'],
+                                                     'R'=>['A','G'],
+                                                     'Y'=>['C','T'],
+                                                     'S'=>['G','C'],
+                                                     'W'=>['A','T'],
+                                                     'K'=>['G','T'],
+                                                     'M'=>['A','C'],
+                                                     'B'=>['C','G','T'],
+                                                     'D'=>['A','G','T'],
+                                                     'H'=>['A','C','T'],
+                                                     'V'=>['A','C','G'],
+                                                     'N'=>['A','T','C','G'],
+                                                     '-'=>['-'])
 
     used_idxs = Array{Int,1}()
 

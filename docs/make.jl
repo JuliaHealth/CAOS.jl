@@ -1,4 +1,4 @@
-using Documenter, CAOS
+using Documenter, CAOS, HTTP
 # using Literate
 
 # compile all examples in BioMedQuery/examples/literate_src into markdown and jupyter notebooks for documentation
@@ -13,8 +13,14 @@ using Documenter, CAOS
 #         Literate.markdown(joinpath(root,file), joinpath(@__DIR__, "src", "examples"))
 #     end
 # end
-
 makedocs()
+
+logo = HTTP.request("GET", "https://gist.githubusercontent.com/fernandogelin/dc1c8bb7e26b10fe0a402d6c76008dd0/raw/83d70068a9a5145bf0b749bc7c3da79a40cb09e9/bcbi-logo.svg")
+logo_str = String(logo.body)
+
+open("build/assets/bcbi-logo.svg", "w") do f
+    write(f, logo_str)
+end
 
 deploydocs(
     deps   = Deps.pip("mkdocs==0.17.5", "mkdocs-material==2.9.4"),
