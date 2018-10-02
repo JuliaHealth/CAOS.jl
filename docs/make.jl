@@ -13,13 +13,15 @@ using Documenter, CAOS, HTTP, JSON
 #         Literate.markdown(joinpath(root,file), joinpath(@__DIR__, "src", "examples"))
 #     end
 # end
-makedocs()
 
 logo = HTTP.request("GET", "https://gist.githubusercontent.com/fernandogelin/dc1c8bb7e26b10fe0a402d6c76008dd0/raw/83d70068a9a5145bf0b749bc7c3da79a40cb09e9/bcbi-logo.svg")
 
 open("build/assets/bcbi-logo.svg", "w") do f
     JSON.print(f, String(logo.body))
 end
+
+
+makedocs()
 
 deploydocs(
     deps   = Deps.pip("mkdocs==0.17.5", "mkdocs-material==2.9.4"),
