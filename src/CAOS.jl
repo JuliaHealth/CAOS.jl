@@ -15,7 +15,9 @@ export generate_caos_rules,
        remove_from_tree!,
        remove_blanks,
        get_max_depth,
-       find_sequence
+       find_sequence,
+       get_sPu_and_sPr,
+       get_cPu_and_cPr
 
 include("caos_functions.jl")
 include("tree_functions.jl")

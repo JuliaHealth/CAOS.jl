@@ -8,7 +8,7 @@ module TestCAOS
     #    ("gap_imputation.jl",     "       Testing: Gap imputation"),
     #    ("classification.jl",     "       Testing: Classification"),
         ("user_functions.jl",     "       Testing: User functions"),
-    #    ("caos_functions.jl",     "       Testing: CAOS functions"),
+        ("caos_functions.jl",     "       Testing: CAOS functions"),
         ("utils.jl",     "       Testing: Utils")
 
         ]
