@@ -71,7 +71,7 @@ Gets all the sPu and sPr for the entire character sequence at a specific node.
 - `taxa_labels::Dict{String,String}`: a mapping of the taxa labels to the character labels.
 - `character_labels::Dict{String,String}`: a mapping of the character labels to the corresponding sequences.
 """
-function get_sPu_and_sPr(nodes::Array{Dict{String,Any}}, node_num::Int64, taxa_labels::Dict{String,String}, character_labels::Dict{String,String})
+function get_sPu_and_sPr(nodes::Array{Dict{String,Any}}, node_num::Int64, taxa_labels::Dict{String,String}, character_labels::Dict{String,String} ; protein=false)
 
     # Initialize variables
     group_taxa = get_group_taxa_at_node(nodes, node_num)
@@ -101,7 +101,11 @@ function get_sPu_and_sPr(nodes::Array{Dict{String,Any}}, node_num::Int64, taxa_l
                         curr_letter = character_labels[taxa_labels[taxa]][idx]
 
                         # Get the transformation of the current letter
-                        curr_letters = letter_transformations[curr_letter]
+                        if protein
+                            curr_letters = curr_letter
+                        else
+                            curr_letters = letter_transformations[curr_letter]
+                        end
 
                         # Iterate through each letter
                         for letter in curr_letters
@@ -119,7 +123,12 @@ function get_sPu_and_sPr(nodes::Array{Dict{String,Any}}, node_num::Int64, taxa_l
 
                                 # Iterate through the character of each member of the other groups, to check if candidate CA
                                 for new_letter in non_group_letters
-                                    new_letters = letter_transformations[new_letter]
+
+                                    if protein
+                                        new_letters = new_letter
+                                    else
+                                        new_letters = letter_transformations[new_letter]
+                                    end
                                     match = letter in new_letters
                                     if match
                                         break
@@ -131,7 +140,11 @@ function get_sPu_and_sPr(nodes::Array{Dict{String,Any}}, node_num::Int64, taxa_l
                                     occurances = 1
                                     for new_character in group_taxa[1:end .!=taxa_idx]
                                         new_letter = character_labels[taxa_labels[new_character]][idx]
-                                        new_letters = letter_transformations[new_letter]
+                                        if protein
+                                            new_letters = new_letter
+                                        else
+                                            new_letters = letter_transformations[new_letter]
+                                        end
                                         match = letter in new_letters
                                         if match
                                             occurances += 1
