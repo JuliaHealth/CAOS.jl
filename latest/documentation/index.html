@@ -440,7 +440,7 @@
 <li><code>tiebreaker::Vector{Dict{String,Int64}}=[Dict{String,Int64}()]</code>: tiebreaker to be used in classification.</li>
 <li><code>combo_classification::Bool=false</code>: whether to use a combo of Blast and CAOS for classification.</li>
 </ul>
-<p><a target='_blank' href='https://github.com/bcbi/CAOS.jl/blob/06c638c8cbe3c785654949a19f6b78882533dd21/src/user_functions.jl#L61-L79' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/bcbi/CAOS.jl/blob/46382521dd1bf3e9f7eadb31b43d950643907f60/src/user_functions.jl#L61-L79' class='documenter-source'>source</a><br></p>
 <p><a id='CAOS.find_sequence-Tuple{CAOS.Node,String}' href='#CAOS.find_sequence-Tuple{CAOS.Node,String}'>#</a>
 <strong><code>CAOS.find_sequence</code></strong> &mdash; <em>Method</em>.</p>
 <div class="codehilite"><pre><span></span>find_sequence(tree::Node, taxa_label::String)
@@ -453,7 +453,7 @@
 <li><code>tree::Node</code>: the tree represented as a Node.</li>
 <li><code>taxa_label::String</code>: taxa label.</li>
 </ul>
-<p><a target='_blank' href='https://github.com/bcbi/CAOS.jl/blob/06c638c8cbe3c785654949a19f6b78882533dd21/src/utils.jl#L61-L69' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/bcbi/CAOS.jl/blob/46382521dd1bf3e9f7eadb31b43d950643907f60/src/utils.jl#L61-L69' class='documenter-source'>source</a><br></p>
 <p><a id='CAOS.generate_caos_rules-Tuple{String,String}' href='#CAOS.generate_caos_rules-Tuple{String,String}'>#</a>
 <strong><code>CAOS.generate_caos_rules</code></strong> &mdash; <em>Method</em>.</p>
 <div class="codehilite"><pre><span></span>generate_caos_rules(tree_file_path::String, output_directory::String)
@@ -466,7 +466,7 @@
 <li><code>tree_file_path::String</code>: path to the Nexus file.</li>
 <li><code>output_directory::String</code>: path to the output directory.</li>
 </ul>
-<p><a target='_blank' href='https://github.com/bcbi/CAOS.jl/blob/06c638c8cbe3c785654949a19f6b78882533dd21/src/user_functions.jl#L2-L10' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/bcbi/CAOS.jl/blob/46382521dd1bf3e9f7eadb31b43d950643907f60/src/user_functions.jl#L2-L10' class='documenter-source'>source</a><br></p>
 <p><a id='CAOS.get_max_depth-Tuple{CAOS.Node,Int64}' href='#CAOS.get_max_depth-Tuple{CAOS.Node,Int64}'>#</a>
 <strong><code>CAOS.get_max_depth</code></strong> &mdash; <em>Method</em>.</p>
 <div class="codehilite"><pre><span></span>get_max_depth(tree::Node, depth::Int64)
@@ -479,7 +479,7 @@
 <li><code>tree::Node</code>: the tree represented as a Node.</li>
 <li><code>depth::Int64</code>: current depth.</li>
 </ul>
-<p><a target='_blank' href='https://github.com/bcbi/CAOS.jl/blob/06c638c8cbe3c785654949a19f6b78882533dd21/src/utils.jl#L22-L30' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/bcbi/CAOS.jl/blob/46382521dd1bf3e9f7eadb31b43d950643907f60/src/utils.jl#L22-L30' class='documenter-source'>source</a><br></p>
 <p><a id='CAOS.get_nodes-Tuple{String}' href='#CAOS.get_nodes-Tuple{String}'>#</a>
 <strong><code>CAOS.get_nodes</code></strong> &mdash; <em>Method</em>.</p>
 <div class="codehilite"><pre><span></span><span class="nt">get_nodes</span><span class="o">(</span><span class="nt">tree</span><span class="p">::</span><span class="nd">String</span> <span class="o">;</span> <span class="nt">taxa_to_remove</span><span class="p">::</span><span class="nd">Union</span><span class="p">{</span><span class="err">Array{String,1</span><span class="p">}</span><span class="o">,</span><span class="nt">Bool</span><span class="err">}</span><span class="o">=</span><span class="nt">false</span><span class="o">)</span>
@@ -492,7 +492,7 @@
 <li><code>tree::String</code>: the tree in Newick format.</li>
 <li><code>taxa_to_remove::Union{Array{String,1},Bool}=false</code>: the taxa that will be removed (if applicable).</li>
 </ul>
-<p><a target='_blank' href='https://github.com/bcbi/CAOS.jl/blob/06c638c8cbe3c785654949a19f6b78882533dd21/src/tree_functions.jl#L88-L96' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/bcbi/CAOS.jl/blob/46382521dd1bf3e9f7eadb31b43d950643907f60/src/tree_functions.jl#L88-L96' class='documenter-source'>source</a><br></p>
 <p><a id='CAOS.load_tree-Tuple{String}' href='#CAOS.load_tree-Tuple{String}'>#</a>
 <strong><code>CAOS.load_tree</code></strong> &mdash; <em>Method</em>.</p>
 <div class="codehilite"><pre><span></span>load_tree(directory::String)
@@ -504,7 +504,7 @@
 <ul>
 <li><code>directory::String</code>: path to directory where tree exists.</li>
 </ul>
-<p><a target='_blank' href='https://github.com/bcbi/CAOS.jl/blob/06c638c8cbe3c785654949a19f6b78882533dd21/src/user_functions.jl#L102-L109' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/bcbi/CAOS.jl/blob/46382521dd1bf3e9f7eadb31b43d950643907f60/src/user_functions.jl#L102-L109' class='documenter-source'>source</a><br></p>
 <p><a id='CAOS.parse_tree-Tuple{String}' href='#CAOS.parse_tree-Tuple{String}'>#</a>
 <strong><code>CAOS.parse_tree</code></strong> &mdash; <em>Method</em>.</p>
 <div class="codehilite"><pre><span></span><span class="nt">parse_tree</span><span class="o">(</span><span class="nt">file_path</span><span class="p">::</span><span class="nd">String</span><span class="o">;</span> <span class="nt">taxa_to_remove</span><span class="p">::</span><span class="nd">Union</span><span class="p">{</span><span class="err">Array{String,1</span><span class="p">}</span><span class="o">,</span><span class="nt">Bool</span><span class="err">}</span><span class="o">=</span><span class="nt">false</span><span class="o">)</span>
@@ -517,7 +517,7 @@
 <li><code>file_path::String</code>: file path to the Nexus file.</li>
 <li><code>taxa_to_remove::Union{Array{String,1},Bool}=false</code>: the taxa that will be removed (if applicable).</li>
 </ul>
-<p><a target='_blank' href='https://github.com/bcbi/CAOS.jl/blob/06c638c8cbe3c785654949a19f6b78882533dd21/src/tree_functions.jl#L159-L167' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/bcbi/CAOS.jl/blob/46382521dd1bf3e9f7eadb31b43d950643907f60/src/tree_functions.jl#L159-L167' class='documenter-source'>source</a><br></p>
 <p><a id='CAOS.remove_blanks-Tuple{Dict{String,String}}' href='#CAOS.remove_blanks-Tuple{Dict{String,String}}'>#</a>
 <strong><code>CAOS.remove_blanks</code></strong> &mdash; <em>Method</em>.</p>
 <div class="codehilite"><pre><span></span><span class="nt">remove_blanks</span><span class="o">(</span><span class="nt">char_label_dict</span><span class="p">::</span><span class="nd">Dict</span><span class="p">{</span><span class="err">String,String</span><span class="p">}</span> <span class="o">;</span> <span class="nt">change_to_N</span><span class="p">::</span><span class="nd">Bool</span><span class="o">=</span><span class="nt">false</span><span class="o">)</span>
@@ -530,7 +530,7 @@
 <li><code>char_label_dict::Dict{String,String}</code>: character label mappings.</li>
 <li><code>change_to_N::Bool=false</code>: whether to change to N or just remove.</li>
 </ul>
-<p><a target='_blank' href='https://github.com/bcbi/CAOS.jl/blob/06c638c8cbe3c785654949a19f6b78882533dd21/src/utils.jl#L1-L9' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/bcbi/CAOS.jl/blob/46382521dd1bf3e9f7eadb31b43d950643907f60/src/utils.jl#L1-L9' class='documenter-source'>source</a><br></p>
 <p><a id='CAOS.remove_from_tree!-Tuple{Array{String,1},Union{Bool, Array{String,1}}}' href='#CAOS.remove_from_tree!-Tuple{Array{String,1},Union{Bool, Array{String,1}}}'>#</a>
 <strong><code>CAOS.remove_from_tree!</code></strong> &mdash; <em>Method</em>.</p>
 <div class="codehilite"><pre><span></span>remove_from_tree!(tree_tokens::Vector{String}, taxa_to_remove::Union{Array{String,1},Bool})
@@ -543,7 +543,7 @@
 <li><code>tree_tokens::Vector{String}</code>: the tree in Newick format, tokenized.</li>
 <li><code>taxa_to_remove::Union{Array{String,1},Bool}</code>: the taxa that will be removed.</li>
 </ul>
-<p><a target='_blank' href='https://github.com/bcbi/CAOS.jl/blob/06c638c8cbe3c785654949a19f6b78882533dd21/src/tree_functions.jl#L31-L39' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/bcbi/CAOS.jl/blob/46382521dd1bf3e9f7eadb31b43d950643907f60/src/tree_functions.jl#L31-L39' class='documenter-source'>source</a><br></p>
 <p><a id='CAOS.CA_matches-Tuple{String,Array{CAOS.Rule,1},Dict{String,Int64},Bool}' href='#CAOS.CA_matches-Tuple{String,Array{CAOS.Rule,1},Dict{String,Int64},Bool}'>#</a>
 <strong><code>CAOS.CA_matches</code></strong> &mdash; <em>Method</em>.</p>
 <div class="codehilite"><pre><span></span>CA_matches(sequence::String, CAs::Vector{Rule}, CA_weights::Dict{String,Int64}, occurrence_weighting::Bool)
@@ -558,7 +558,7 @@
 <li><code>CA_weights::Dict{String,Int64}</code>: weights to use for CA counts.</li>
 <li><code>occurrence_weighting::Bool</code>: whether to use occurrence weighting during counting.</li>
 </ul>
-<p><a target='_blank' href='https://github.com/bcbi/CAOS.jl/blob/06c638c8cbe3c785654949a19f6b78882533dd21/src/classification.jl#L1-L11' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/bcbi/CAOS.jl/blob/46382521dd1bf3e9f7eadb31b43d950643907f60/src/classification.jl#L1-L11' class='documenter-source'>source</a><br></p>
 <p><a id='CAOS.CV_classification-Tuple{String,Dict{String,String},String,String,Dict{Int64,Dict{String,Int64}},Bool,Array{Dict{String,Int64},1}}' href='#CAOS.CV_classification-Tuple{String,Dict{String,String},String,String,Dict{Int64,Dict{String,Int64}},Bool,Array{Dict{String,Int64},1}}'>#</a>
 <strong><code>CAOS.CV_classification</code></strong> &mdash; <em>Method</em>.</p>
 <div class="codehilite"><pre><span></span><span class="nt">CV_classification</span><span class="o">(</span><span class="nt">taxa_label</span><span class="p">::</span><span class="nd">String</span><span class="o">,</span> <span class="nt">character_labels</span><span class="p">::</span><span class="nd">Dict</span><span class="p">{</span><span class="err">String,String</span><span class="p">}</span><span class="o">,</span>
@@ -579,7 +579,7 @@
 <li><code>tiebreaker::Vector{Dict{String,Int64}}</code>: tiebreaking procedures to use.</li>
 <li><code>combo_classification::Bool=false</code>: whether to use both Blast and CAOS for classification.</li>
 </ul>
-<p><a target='_blank' href='https://github.com/bcbi/CAOS.jl/blob/06c638c8cbe3c785654949a19f6b78882533dd21/src/classification.jl#L179-L195' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/bcbi/CAOS.jl/blob/46382521dd1bf3e9f7eadb31b43d950643907f60/src/classification.jl#L183-L199' class='documenter-source'>source</a><br></p>
 <p><a id='CAOS.add_blanks-Tuple{String,String,Dict{String,String},Dict{String,String}}' href='#CAOS.add_blanks-Tuple{String,String,Dict{String,String},Dict{String,String}}'>#</a>
 <strong><code>CAOS.add_blanks</code></strong> &mdash; <em>Method</em>.</p>
 <div class="codehilite"><pre><span></span><span class="nt">add_blanks</span><span class="o">(</span><span class="nt">query_path</span><span class="p">::</span><span class="nd">String</span><span class="o">,</span> <span class="nt">db_path</span><span class="p">::</span><span class="nd">String</span><span class="o">,</span> <span class="nt">character_labels</span><span class="p">::</span><span class="nd">Dict</span><span class="p">{</span><span class="err">String,String</span><span class="p">}</span><span class="o">,</span>
@@ -596,7 +596,7 @@
 <li><code>character_labels_no_gaps::Dict{String,String}</code>: character labels with gaps removed from sequences.</li>
 <li><code>return_blast::Bool=false</code>: whether to return blast results.</li>
 </ul>
-<p><a target='_blank' href='https://github.com/bcbi/CAOS.jl/blob/06c638c8cbe3c785654949a19f6b78882533dd21/src/gap_imputation.jl#L252-L264' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/bcbi/CAOS.jl/blob/46382521dd1bf3e9f7eadb31b43d950643907f60/src/gap_imputation.jl#L252-L264' class='documenter-source'>source</a><br></p>
 <p><a id='CAOS.add_blanks_to_back-Tuple{String,String,String,Int64,Int64,Int64,Array{String,1},Int64,Dict{String,String}}' href='#CAOS.add_blanks_to_back-Tuple{String,String,String,Int64,Int64,Int64,Array{String,1},Int64,Dict{String,String}}'>#</a>
 <strong><code>CAOS.add_blanks_to_back</code></strong> &mdash; <em>Method</em>.</p>
 <div class="codehilite"><pre><span></span>add_blanks_to_back(subject::String, query::String, new_seq::String,
@@ -618,7 +618,7 @@ hitnames::Vector{String}, hit_idx::Int64, character_labels::Dict{String,String})
 <li><code>hit_idx::Int64</code>: index of the current blast hit.</li>
 <li><code>character_labels::Dict{String,String}</code>: a mapping of the character labels to the corresponding sequences.</li>
 </ul>
-<p><a target='_blank' href='https://github.com/bcbi/CAOS.jl/blob/06c638c8cbe3c785654949a19f6b78882533dd21/src/gap_imputation.jl#L77-L94' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/bcbi/CAOS.jl/blob/46382521dd1bf3e9f7eadb31b43d950643907f60/src/gap_imputation.jl#L77-L94' class='documenter-source'>source</a><br></p>
 <p><a id='CAOS.add_blanks_to_front-Tuple{String,String,String,Int64,Int64,Int64,Array{String,1},Int64,Dict{String,String}}' href='#CAOS.add_blanks_to_front-Tuple{String,String,String,Int64,Int64,Int64,Array{String,1},Int64,Dict{String,String}}'>#</a>
 <strong><code>CAOS.add_blanks_to_front</code></strong> &mdash; <em>Method</em>.</p>
 <div class="codehilite"><pre><span></span>add_blanks_to_front(subject::String, query::String, new_seq::String,
@@ -640,7 +640,7 @@ hitnames::Vector{String}, hit_idx::Int64, character_labels::Dict{String,String})
 <li><code>hit_idx::Int64</code>: index of the current blast hit.</li>
 <li><code>character_labels::Dict{String,String}</code>: a mapping of the character labels to the corresponding sequences.</li>
 </ul>
-<p><a target='_blank' href='https://github.com/bcbi/CAOS.jl/blob/06c638c8cbe3c785654949a19f6b78882533dd21/src/gap_imputation.jl#L142-L159' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/bcbi/CAOS.jl/blob/46382521dd1bf3e9f7eadb31b43d950643907f60/src/gap_imputation.jl#L142-L159' class='documenter-source'>source</a><br></p>
 <p><a id='CAOS.add_nodes!-Tuple{CAOS.Node,Array{Dict{String,Any},N} where N,Array{Dict{String,Any},N} where N,Array{Dict{String,Any},N} where N,Array{Dict{String,Any},N} where N,Dict{String,String},Dict{String,String},Array{Dict{String,Any},N} where N,Int64}' href='#CAOS.add_nodes!-Tuple{CAOS.Node,Array{Dict{String,Any},N} where N,Array{Dict{String,Any},N} where N,Array{Dict{String,Any},N} where N,Array{Dict{String,Any},N} where N,Dict{String,String},Dict{String,String},Array{Dict{String,Any},N} where N,Int64}'>#</a>
 <strong><code>CAOS.add_nodes!</code></strong> &mdash; <em>Method</em>.</p>
 <div class="codehilite"><pre><span></span><span class="nt">add_nodes</span><span class="o">!(</span><span class="nt">tree</span><span class="p">::</span><span class="nd">Node</span><span class="o">,</span><span class="nt">sPu</span><span class="p">::</span><span class="nd">Array</span><span class="p">{</span><span class="err">Dict{String,Any</span><span class="p">}</span><span class="err">}</span><span class="o">,</span><span class="nt">sPr</span><span class="p">::</span><span class="nd">Array</span><span class="p">{</span><span class="err">Dict{String,Any</span><span class="p">}</span><span class="err">}</span><span class="o">,</span>
@@ -662,8 +662,9 @@ hitnames::Vector{String}, hit_idx::Int64, character_labels::Dict{String,String})
 <li><code>nodes::Array{Dict{String,Any}}</code>: an array of nodes.</li>
 <li><code>node_num::Int64</code>: the current node number.</li>
 <li><code>complex::Bool=true</code>: indicates whether complex rules should be calculated</li>
+<li><code>protein::Bool=false</code>: indicates whether dataset is a protein (or nucleotide)</li>
 </ul>
-<p><a target='_blank' href='https://github.com/bcbi/CAOS.jl/blob/06c638c8cbe3c785654949a19f6b78882533dd21/src/tree_functions.jl#L247-L265' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/bcbi/CAOS.jl/blob/46382521dd1bf3e9f7eadb31b43d950643907f60/src/tree_functions.jl#L247-L266' class='documenter-source'>source</a><br></p>
 <p><a id='CAOS.check_CV_classification-Tuple{String,Dict{String,String},Dict{String,String},Any,String}' href='#CAOS.check_CV_classification-Tuple{String,Dict{String,String},Dict{String,String},Any,String}'>#</a>
 <strong><code>CAOS.check_CV_classification</code></strong> &mdash; <em>Method</em>.</p>
 <div class="codehilite"><pre><span></span>check_CV_classification(taxa_label::String, character_labels::Dict{String,String},
@@ -680,7 +681,7 @@ taxa_labels::Dict{String,String}, classification::Any, gene::String)
 <li><code>classification::Any</code>: the classification to check.</li>
 <li><code>gene::String</code>: gene which is being classified.</li>
 </ul>
-<p><a target='_blank' href='https://github.com/bcbi/CAOS.jl/blob/06c638c8cbe3c785654949a19f6b78882533dd21/src/classification.jl#L226-L238' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/bcbi/CAOS.jl/blob/46382521dd1bf3e9f7eadb31b43d950643907f60/src/classification.jl#L230-L242' class='documenter-source'>source</a><br></p>
 <p><a id='CAOS.classify_all_CV-Tuple{Dict{String,String},Dict{String,String},String,String}' href='#CAOS.classify_all_CV-Tuple{Dict{String,String},Dict{String,String},String,String}'>#</a>
 <strong><code>CAOS.classify_all_CV</code></strong> &mdash; <em>Method</em>.</p>
 <div class="codehilite"><pre><span></span><span class="nt">classify_all_CV</span><span class="o">(</span><span class="nt">character_labels</span><span class="p">::</span><span class="nd">Dict</span><span class="p">{</span><span class="err">String,String</span><span class="p">}</span><span class="o">,</span> <span class="nt">taxa_labels</span><span class="p">::</span><span class="nd">Dict</span><span class="p">{</span><span class="err">String,String</span><span class="p">}</span><span class="o">,</span>
@@ -705,7 +706,7 @@ taxa_labels::Dict{String,String}, classification::Any, gene::String)
 <li><code>downsample::Bool=false</code>: whether we are using downsampling.</li>
 <li><code>combo_classification::Bool=false</code>: whether to use a combo of Blast and CAOS for classification.</li>
 </ul>
-<p><a target='_blank' href='https://github.com/bcbi/CAOS.jl/blob/06c638c8cbe3c785654949a19f6b78882533dd21/src/classification.jl#L296-L316' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/bcbi/CAOS.jl/blob/46382521dd1bf3e9f7eadb31b43d950643907f60/src/classification.jl#L300-L320' class='documenter-source'>source</a><br></p>
 <p><a id='CAOS.classify_sequence-Tuple{String,CAOS.Node,Dict{String,Int64},Dict{Int64,Dict{String,Int64}},Bool,Int64,Array{Dict{String,Int64},1}}' href='#CAOS.classify_sequence-Tuple{String,CAOS.Node,Dict{String,Int64},Dict{Int64,Dict{String,Int64}},Bool,Int64,Array{Dict{String,Int64},1}}'>#</a>
 <strong><code>CAOS.classify_sequence</code></strong> &mdash; <em>Method</em>.</p>
 <div class="codehilite"><pre><span></span><span class="nt">classify_sequence</span><span class="o">(</span><span class="nt">sequence</span><span class="p">::</span><span class="nd">String</span><span class="o">,</span> <span class="nt">tree</span><span class="p">::</span><span class="nd">Node</span><span class="o">,</span> <span class="nt">CA_weights</span><span class="p">::</span><span class="nd">Dict</span><span class="p">{</span><span class="err">String,Int64</span><span class="p">}</span><span class="o">,</span>
@@ -727,7 +728,7 @@ taxa_labels::Dict{String,String}, classification::Any, gene::String)
 <li><code>blast_results=["Fake Label"]</code>: list of blast results.</li>
 <li><code>combo_classification::Bool=false</code>: whether to use both Blast and CAOS for classification.</li>
 </ul>
-<p><a target='_blank' href='https://github.com/bcbi/CAOS.jl/blob/06c638c8cbe3c785654949a19f6b78882533dd21/src/classification.jl#L95-L112' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/bcbi/CAOS.jl/blob/46382521dd1bf3e9f7eadb31b43d950643907f60/src/classification.jl#L99-L116' class='documenter-source'>source</a><br></p>
 <p><a id='CAOS.convert_to_struct-Tuple{Dict{String,Any},CAOS.Node}' href='#CAOS.convert_to_struct-Tuple{Dict{String,Any},CAOS.Node}'>#</a>
 <strong><code>CAOS.convert_to_struct</code></strong> &mdash; <em>Method</em>.</p>
 <div class="codehilite"><pre><span></span>convert_to_struct(tree_dict::Dict{String,Any}, tree_obj::Node)
@@ -740,7 +741,7 @@ taxa_labels::Dict{String,String}, classification::Any, gene::String)
 <li><code>tree_dict::Dict{String,Any}</code>: tree as a dictionary after being read from json.</li>
 <li><code>tree_obj::Node</code>: the tree (Node).</li>
 </ul>
-<p><a target='_blank' href='https://github.com/bcbi/CAOS.jl/blob/06c638c8cbe3c785654949a19f6b78882533dd21/src/gap_imputation.jl#L1-L9' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/bcbi/CAOS.jl/blob/46382521dd1bf3e9f7eadb31b43d950643907f60/src/gap_imputation.jl#L1-L9' class='documenter-source'>source</a><br></p>
 <p><a id='CAOS.downsample_taxa-Tuple{Array{String,N} where N,Float64}' href='#CAOS.downsample_taxa-Tuple{Array{String,N} where N,Float64}'>#</a>
 <strong><code>CAOS.downsample_taxa</code></strong> &mdash; <em>Method</em>.</p>
 <div class="codehilite"><pre><span></span>downsample_taxa(taxa::Array{String}, perc_keep::Float64)
@@ -753,7 +754,7 @@ taxa_labels::Dict{String,String}, classification::Any, gene::String)
 <li><code>taxa::Array{String}</code>: list of taxa.</li>
 <li><code>perc_keep::Float64</code>: percentage of taxa to keep.</li>
 </ul>
-<p><a target='_blank' href='https://github.com/bcbi/CAOS.jl/blob/06c638c8cbe3c785654949a19f6b78882533dd21/src/utils.jl#L253-L261' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/bcbi/CAOS.jl/blob/46382521dd1bf3e9f7eadb31b43d950643907f60/src/utils.jl#L253-L261' class='documenter-source'>source</a><br></p>
 <p><a id='CAOS.get_adjusted_start-Tuple{Int64,String}' href='#CAOS.get_adjusted_start-Tuple{Int64,String}'>#</a>
 <strong><code>CAOS.get_adjusted_start</code></strong> &mdash; <em>Method</em>.</p>
 <div class="codehilite"><pre><span></span>get_adjusted_start(original_start::Int, subject::String)
@@ -766,7 +767,7 @@ taxa_labels::Dict{String,String}, classification::Any, gene::String)
 <li><code>original_start::Int</code>: the index of the original starting position.</li>
 <li><code>subject::String</code>: the matched subject.</li>
 </ul>
-<p><a target='_blank' href='https://github.com/bcbi/CAOS.jl/blob/06c638c8cbe3c785654949a19f6b78882533dd21/src/utils.jl#L205-L213' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/bcbi/CAOS.jl/blob/46382521dd1bf3e9f7eadb31b43d950643907f60/src/utils.jl#L205-L213' class='documenter-source'>source</a><br></p>
 <p><a id='CAOS.get_all_neighbors-Tuple{CAOS.Node,Dict{String,String},String}' href='#CAOS.get_all_neighbors-Tuple{CAOS.Node,Dict{String,String},String}'>#</a>
 <strong><code>CAOS.get_all_neighbors</code></strong> &mdash; <em>Method</em>.</p>
 <div class="codehilite"><pre><span></span>get_all_neighbors(tree::Node, character_labels::Dict{String,String}, taxa_label::String)
@@ -780,7 +781,7 @@ taxa_labels::Dict{String,String}, classification::Any, gene::String)
 <li><code>character_labels::Dict{String,String}</code>: character label mappings.</li>
 <li><code>taxa_label::String</code>: taxa label.</li>
 </ul>
-<p><a target='_blank' href='https://github.com/bcbi/CAOS.jl/blob/06c638c8cbe3c785654949a19f6b78882533dd21/src/utils.jl#L167-L176' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/bcbi/CAOS.jl/blob/46382521dd1bf3e9f7eadb31b43d950643907f60/src/utils.jl#L167-L176' class='documenter-source'>source</a><br></p>
 <p><a id='CAOS.get_best_hit-Tuple{Array{BioTools.BLAST.BLASTResult,1},String,Dict{String,String},Dict{String,String}}' href='#CAOS.get_best_hit-Tuple{Array{BioTools.BLAST.BLASTResult,1},String,Dict{String,String},Dict{String,String}}'>#</a>
 <strong><code>CAOS.get_best_hit</code></strong> &mdash; <em>Method</em>.</p>
 <div class="codehilite"><pre><span></span>get_best_hit(results::Array{BioTools.BLAST.BLASTResult,1}, query::String,
@@ -796,7 +797,7 @@ character_labels::Dict{String,String},  character_labels_no_gaps::Dict{String,St
 <li><code>character_labels::Dict{String,String}</code>: a mapping of the character labels to the corresponding sequences.</li>
 <li><code>character_labels_no_gaps::Dict{String,String}</code>: character labels with gaps removed from sequences.</li>
 </ul>
-<p><a target='_blank' href='https://github.com/bcbi/CAOS.jl/blob/06c638c8cbe3c785654949a19f6b78882533dd21/src/gap_imputation.jl#L207-L218' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/bcbi/CAOS.jl/blob/46382521dd1bf3e9f7eadb31b43d950643907f60/src/gap_imputation.jl#L207-L218' class='documenter-source'>source</a><br></p>
 <p><a id='CAOS.get_cPu_and_cPr-Tuple{Array{Dict{String,Any},N} where N,Int64,Dict{String,String},Dict{String,String},Array{Dict{String,Any},N} where N,Array{Dict{String,Any},N} where N}' href='#CAOS.get_cPu_and_cPr-Tuple{Array{Dict{String,Any},N} where N,Int64,Dict{String,String},Dict{String,String},Array{Dict{String,Any},N} where N,Array{Dict{String,Any},N} where N}'>#</a>
 <strong><code>CAOS.get_cPu_and_cPr</code></strong> &mdash; <em>Method</em>.</p>
 <div class="codehilite"><pre><span></span>get_cPu_and_cPr(nodes::Array{Dict{String,Any}}, node_num::Int64, taxa_labels::Dict{String,String},
@@ -814,7 +815,7 @@ character_labels::Dict{String,String}, sPu::Array{Dict{String,Any}}, sPr::Array{
 <li><code>sPu::Array{Dict{String,Any}}</code>: list of simple pure rules.</li>
 <li><code>sPr::Array{Dict{String,Any}}</code>: list of simple private rules.</li>
 </ul>
-<p><a target='_blank' href='https://github.com/bcbi/CAOS.jl/blob/06c638c8cbe3c785654949a19f6b78882533dd21/src/caos_functions.jl#L165-L178' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/bcbi/CAOS.jl/blob/46382521dd1bf3e9f7eadb31b43d950643907f60/src/caos_functions.jl#L178-L191' class='documenter-source'>source</a><br></p>
 <p><a id='CAOS.get_descendents-Tuple{CAOS.Node}' href='#CAOS.get_descendents-Tuple{CAOS.Node}'>#</a>
 <strong><code>CAOS.get_descendents</code></strong> &mdash; <em>Method</em>.</p>
 <div class="codehilite"><pre><span></span>get_descendents(tree::Node)
@@ -826,7 +827,7 @@ character_labels::Dict{String,String}, sPu::Array{Dict{String,Any}}, sPr::Array{
 <ul>
 <li><code>tree::Node</code>: the tree represented as a Node.</li>
 </ul>
-<p><a target='_blank' href='https://github.com/bcbi/CAOS.jl/blob/06c638c8cbe3c785654949a19f6b78882533dd21/src/utils.jl#L276-L283' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/bcbi/CAOS.jl/blob/46382521dd1bf3e9f7eadb31b43d950643907f60/src/utils.jl#L276-L283' class='documenter-source'>source</a><br></p>
 <p><a id='CAOS.get_duplicate_labels-Tuple{Dict{String,String},String}' href='#CAOS.get_duplicate_labels-Tuple{Dict{String,String},String}'>#</a>
 <strong><code>CAOS.get_duplicate_labels</code></strong> &mdash; <em>Method</em>.</p>
 <div class="codehilite"><pre><span></span>get_duplicate_labels(character_labels::Dict{String,String}, label::String)
@@ -839,7 +840,7 @@ character_labels::Dict{String,String}, sPu::Array{Dict{String,Any}}, sPr::Array{
 <li><code>character_labels::Dict{String,String}</code>: character label mappings.</li>
 <li><code>label::String</code>: taxa label to search for duplicates of.</li>
 </ul>
-<p><a target='_blank' href='https://github.com/bcbi/CAOS.jl/blob/06c638c8cbe3c785654949a19f6b78882533dd21/src/utils.jl#L136-L144' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/bcbi/CAOS.jl/blob/46382521dd1bf3e9f7eadb31b43d950643907f60/src/utils.jl#L136-L144' class='documenter-source'>source</a><br></p>
 <p><a id='CAOS.get_first_taxa_from_tree-Tuple{CAOS.Node}' href='#CAOS.get_first_taxa_from_tree-Tuple{CAOS.Node}'>#</a>
 <strong><code>CAOS.get_first_taxa_from_tree</code></strong> &mdash; <em>Method</em>.</p>
 <div class="codehilite"><pre><span></span>get_first_taxa_from_tree(tree::Node)
@@ -851,7 +852,7 @@ character_labels::Dict{String,String}, sPu::Array{Dict{String,Any}}, sPr::Array{
 <ul>
 <li><code>tree::Node</code>: the tree represented as a Node.</li>
 </ul>
-<p><a target='_blank' href='https://github.com/bcbi/CAOS.jl/blob/06c638c8cbe3c785654949a19f6b78882533dd21/src/utils.jl#L237-L244' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/bcbi/CAOS.jl/blob/46382521dd1bf3e9f7eadb31b43d950643907f60/src/utils.jl#L237-L244' class='documenter-source'>source</a><br></p>
 <p><a id='CAOS.get_group_combos-Tuple{Array{Array{String,N} where N,N} where N}' href='#CAOS.get_group_combos-Tuple{Array{Array{String,N} where N,N} where N}'>#</a>
 <strong><code>CAOS.get_group_combos</code></strong> &mdash; <em>Method</em>.</p>
 <div class="codehilite"><pre><span></span>get_group_combos(group_taxa::Array{Array{String}})
@@ -863,7 +864,7 @@ character_labels::Dict{String,String}, sPu::Array{Dict{String,Any}}, sPr::Array{
 <ul>
 <li><code>group_taxa::Array{Array{String}}</code>: list of taxa within a group.</li>
 </ul>
-<p><a target='_blank' href='https://github.com/bcbi/CAOS.jl/blob/06c638c8cbe3c785654949a19f6b78882533dd21/src/caos_functions.jl#L40-L47' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/bcbi/CAOS.jl/blob/46382521dd1bf3e9f7eadb31b43d950643907f60/src/caos_functions.jl#L40-L47' class='documenter-source'>source</a><br></p>
 <p><a id='CAOS.get_group_taxa_at_node-Tuple{Array{Dict{String,Any},N} where N,Int64}' href='#CAOS.get_group_taxa_at_node-Tuple{Array{Dict{String,Any},N} where N,Int64}'>#</a>
 <strong><code>CAOS.get_group_taxa_at_node</code></strong> &mdash; <em>Method</em>.</p>
 <div class="codehilite"><pre><span></span>get_group_taxa_at_node(nodes::Array{Dict{String,Any}}, node_num::Int64)
@@ -876,7 +877,7 @@ character_labels::Dict{String,String}, sPu::Array{Dict{String,Any}}, sPr::Array{
 <li><code>nodes::Array{Dict{String,Any}}</code>: list of nodes.</li>
 <li><code>node_num::Int64</code>: current node index.</li>
 </ul>
-<p><a target='_blank' href='https://github.com/bcbi/CAOS.jl/blob/06c638c8cbe3c785654949a19f6b78882533dd21/src/caos_functions.jl#L1-L9' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/bcbi/CAOS.jl/blob/46382521dd1bf3e9f7eadb31b43d950643907f60/src/caos_functions.jl#L1-L9' class='documenter-source'>source</a><br></p>
 <p><a id='CAOS.get_neighbors-Tuple{CAOS.Node,String}' href='#CAOS.get_neighbors-Tuple{CAOS.Node,String}'>#</a>
 <strong><code>CAOS.get_neighbors</code></strong> &mdash; <em>Method</em>.</p>
 <div class="codehilite"><pre><span></span>get_neighbors(tree::Node, taxa_label::String)
@@ -889,7 +890,7 @@ character_labels::Dict{String,String}, sPu::Array{Dict{String,Any}}, sPr::Array{
 <li><code>tree::Node</code>: the tree represented as a Node.</li>
 <li><code>taxa_label::String</code>: taxa label.</li>
 </ul>
-<p><a target='_blank' href='https://github.com/bcbi/CAOS.jl/blob/06c638c8cbe3c785654949a19f6b78882533dd21/src/utils.jl#L97-L106' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/bcbi/CAOS.jl/blob/46382521dd1bf3e9f7eadb31b43d950643907f60/src/utils.jl#L97-L106' class='documenter-source'>source</a><br></p>
 <p><a id='CAOS.get_next_hit-Tuple{Array{String,1},Int64}' href='#CAOS.get_next_hit-Tuple{Array{String,1},Int64}'>#</a>
 <strong><code>CAOS.get_next_hit</code></strong> &mdash; <em>Method</em>.</p>
 <div class="codehilite"><pre><span></span>get_next_hit(hitnames::Vector{String}, hit_idx::Int64)
@@ -902,7 +903,7 @@ character_labels::Dict{String,String}, sPu::Array{Dict{String,Any}}, sPr::Array{
 <li><code>hitnames::Vector{String}</code>: a list of all blastn hitnames.</li>
 <li><code>hit_idx::Int64</code>: index of the current hit.</li>
 </ul>
-<p><a target='_blank' href='https://github.com/bcbi/CAOS.jl/blob/06c638c8cbe3c785654949a19f6b78882533dd21/src/gap_imputation.jl#L41-L49' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/bcbi/CAOS.jl/blob/46382521dd1bf3e9f7eadb31b43d950643907f60/src/gap_imputation.jl#L41-L49' class='documenter-source'>source</a><br></p>
 <p><a id='CAOS.get_sPu_and_sPr-Tuple{Array{Dict{String,Any},N} where N,Int64,Dict{String,String},Dict{String,String}}' href='#CAOS.get_sPu_and_sPr-Tuple{Array{Dict{String,Any},N} where N,Int64,Dict{String,String},Dict{String,String}}'>#</a>
 <strong><code>CAOS.get_sPu_and_sPr</code></strong> &mdash; <em>Method</em>.</p>
 <div class="codehilite"><pre><span></span>get_sPu_and_sPr(nodes::Array{Dict{String,Any}}, node_num::Int64,
@@ -918,7 +919,7 @@ taxa_labels::Dict{String,String}, character_labels::Dict{String,String})
 <li><code>taxa_labels::Dict{String,String}</code>: a mapping of the taxa labels to the character labels.</li>
 <li><code>character_labels::Dict{String,String}</code>: a mapping of the character labels to the corresponding sequences.</li>
 </ul>
-<p><a target='_blank' href='https://github.com/bcbi/CAOS.jl/blob/06c638c8cbe3c785654949a19f6b78882533dd21/src/caos_functions.jl#L62-L73' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/bcbi/CAOS.jl/blob/46382521dd1bf3e9f7eadb31b43d950643907f60/src/caos_functions.jl#L62-L73' class='documenter-source'>source</a><br></p>
 <p><a id='CAOS.Node' href='#CAOS.Node'>#</a>
 <strong><code>CAOS.Node</code></strong> &mdash; <em>Type</em>.</p>
 <div class="codehilite"><pre><span></span>Node(CAs::Array{Rule,1}, taxa_label::String=&quot;&quot;)
@@ -926,7 +927,7 @@ taxa_labels::Dict{String,String}, character_labels::Dict{String,String})
 
 
 <p>Struct to store a node (is recursive).</p>
-<p><a target='_blank' href='https://github.com/bcbi/CAOS.jl/blob/06c638c8cbe3c785654949a19f6b78882533dd21/src/tree_functions.jl#L16-L20' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/bcbi/CAOS.jl/blob/46382521dd1bf3e9f7eadb31b43d950643907f60/src/tree_functions.jl#L16-L20' class='documenter-source'>source</a><br></p>
 <p><a id='CAOS.Rule' href='#CAOS.Rule'>#</a>
 <strong><code>CAOS.Rule</code></strong> &mdash; <em>Type</em>.</p>
 <div class="codehilite"><pre><span></span>Rule(idxs::Tuple{Vararg{Int}}, char_attr::Tuple{Vararg{Char}},
@@ -935,7 +936,7 @@ is_pure::Bool, num_group::Int, num_non_group::Int, occurances::Int)
 
 
 <p>Struct to store relevant information about a CA.</p>
-<p><a target='_blank' href='https://github.com/bcbi/CAOS.jl/blob/06c638c8cbe3c785654949a19f6b78882533dd21/src/tree_functions.jl#L1-L6' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/bcbi/CAOS.jl/blob/46382521dd1bf3e9f7eadb31b43d950643907f60/src/tree_functions.jl#L1-L6' class='documenter-source'>source</a><br></p>
                 
                   
                 
