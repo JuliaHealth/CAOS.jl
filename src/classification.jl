@@ -9,7 +9,7 @@ Counts the number of CA's matched by a sequence (only support for simple rules).
 - `CA_weights::Dict{String,Int64}`: weights to use for CA counts.
 - `occurrence_weighting::Bool`: whether to use occurrence weighting during counting.
 """
-function CA_matches(sequence::String, CAs::Vector{Rule}, CA_weights::Dict{String,Int64}, occurrence_weighting::Bool)
+function CA_matches(sequence::String, CAs::Vector{Rule}, CA_weights::Dict{String,Int64}, occurrence_weighting::Bool ; protein=false)
 
     letter_transformations = Dict{Char,Vector{Char}}('A'=>['A'],
                                                      'T'=>['T'],
@@ -49,7 +49,11 @@ function CA_matches(sequence::String, CAs::Vector{Rule}, CA_weights::Dict{String
                 break
             end
 
-            seq_letters = letter_transformations[sequence[idx]]
+            if haskey(letter_transformations, sequence[idx])
+                seq_letters = letter_transformations[sequence[idx]]
+            else
+                seq_letters = sequence[idx]
+            end
 
             if !(rule.char_attr[iter] in seq_letters)
                 is_match = false
@@ -146,7 +150,7 @@ function classify_sequence(sequence::String, tree::Node, CA_weights::Dict{String
             push!(child_CA_score, CA_matches(sequence, child.CAs, CA_weights, occurrence_weighting))
         end
 
-        max_child_idx = findall(score -> score == maximum(child_CA_score), child_CA_score)
+        max_child_idx = argmax(child_CA_score)
 
         # Select the child with highest CA score and descend in that direction
         if length(max_child_idx) == 1
@@ -195,19 +199,19 @@ Gets the classification for a LOOCV tree.
 """
 function CV_classification(taxa_label::String, character_labels::Dict{String,String}, gene::String, percent_test::String, all_CA_weights::Dict{Int,Dict{String,Int64}}, occurrence_weighting::Bool, tiebreaker::Vector{Dict{String,Int64}}; combo_classification::Bool=false)
 
-    home_dir = "/users/jkatz/scratch/Desktop"
+    CAOS_path = "/Users/JasonKatz/Desktop/BCBI/CAOS_package"
 
     character_labels_no_gaps = remove_blanks(character_labels)
 
     # Get the new sequence after imputing blanks
-    new_seq,blast_results = add_blanks("$home_dir/Trees_Genes/$gene/$percent_test/queries/Query_$taxa_label.txt", "$home_dir/Trees_Genes/$gene/$percent_test/char_labels.fasta", character_labels, character_labels_no_gaps, return_blast=true)
+    new_seq,blast_results = add_blanks("$CAOS_path/test/HPV/test_$percent_test/queries/Query_$taxa_label.txt", "$CAOS_path/test/HPV/test_$percent_test/char_labels.fasta", character_labels, character_labels_no_gaps, return_blast=true)
 
     if new_seq == "Error"
         return new_seq
     end
 
     # Load tree from json
-    open("$home_dir/Trees_Genes/$gene/$percent_test/tree.json", "r") do f
+    open("$CAOS_path/test/HPV/test_$percent_test/tree.json", "r") do f
         global loaded_tree
         loaded_tree=JSON.parse(f)  # parse and transform data
     end
@@ -238,13 +242,13 @@ Checks if the classification from a LOOCV tree is correct.
 """
 function check_CV_classification(taxa_label::String, character_labels::Dict{String,String}, taxa_labels::Dict{String,String}, classification::Any, gene::String)
 
-    home_dir = "/users/jkatz/scratch/Desktop"
+    CAOS_path = "/Users/JasonKatz/Desktop/BCBI/CAOS_package"
 
     # Get the original tree
     tree_load = Node([])
 
     # Load tree from json
-    open("$home_dir/Trees_Genes/$gene/tree.json", "r") do f
+    open("$CAOS_path/test/HPV/tree.json", "r") do f
         global loaded_tree
         loaded_tree=JSON.parse(f)  # parse and transform data
     end
@@ -316,9 +320,9 @@ Classifies all sequences using CAOS and LOOCV.
 """
 function classify_all_CV(character_labels::Dict{String,String}, taxa_labels::Dict{String,String}, gene::String, percent_test::String ; blast_only::Bool=false, all_CA_weights::Dict{Int64,Dict{String,Int64}}=Dict(1=>Dict("sPu"=>1,"sPr"=>1,"cPu"=>1,"cPr"=>1)), occurrence_weighting::Bool=false, tiebreaker::Vector{Dict{String,Int64}}=[Dict{String,Int64}()], downsample::Bool=false, combo_classification::Bool=false)
 
-    home_dir = "/users/jkatz/scratch/Desktop"
+    CAOS_path = "/Users/JasonKatz/Desktop/BCBI/CAOS_package"
 
-    open("$home_dir/Trees_Genes/$gene/$percent_test/test_genes.json", "r") do f
+    open("$CAOS_path/test/HPV/test_$percent_test/test_genes.json", "r") do f
         #global test_taxa
         test_taxa = JSON.parse(f)  # parse and transform data
     end
@@ -347,7 +351,7 @@ function classify_all_CV(character_labels::Dict{String,String}, taxa_labels::Dic
         if blast_only
             classification = ""
             try
-                classification = blastn("$home_dir/Trees_Genes/$gene/$percent_test/queries/Query_$taxon.txt", "$home_dir/Trees_Genes/$gene/$percent_test/char_labels.fasta", ["-task", "blastn", "-max_target_seqs", 10], db=true)[1].hitname
+                classification = blastp("$CAOS_path/test/HPV/test_$percent_test/queries/Query_$taxon.txt", "$CAOS_path/test/HPV/test_$percent_test/char_labels.fasta", ["-task", "blastp", "-max_target_seqs", 10], db=true)[1].hitname
             catch
                 classification = "Error"
             end
@@ -382,19 +386,19 @@ function classify_all_CV(character_labels::Dict{String,String}, taxa_labels::Dic
         if mod(idx,25) == 0
             partial_results = JSON.json(Dict("Matches" => matches, "Under_Classifications" => under_classifications, "Total" => idx-errors["Num_Errors"], "Errors" => errors))
             if blast_only
-                open("$gene/$percent_test/partial_blast_results.json", "w") do f
+                open("$CAOS_path/test/HPV/test_$percent_test/partial_blast_results.json", "w") do f
                     write(f, partial_results)
                 end
             elseif combo_classification
-                open("$gene/$percent_test/partial_combo_results.json", "w") do f
+                open("$CAOS_path/test/HPV/test_$percent_test/partial_combo_results.json", "w") do f
                     write(f, partial_results)
                 end
             elseif occurrence_weighting
-                open("$gene/$percent_test/partial_weighted_results.json", "w") do f
+                open("$CAOS_path/test/HPV/test_$percent_test/partial_weighted_results.json", "w") do f
                     write(f, partial_results)
                 end
             else
-                open("$gene/$percent_test/partial_results.json", "w") do f
+                open("$CAOS_path/test/HPV/test_$percent_test/partial_results.json", "w") do f
                     write(f, partial_results)
                 end
             end

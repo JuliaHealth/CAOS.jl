@@ -262,8 +262,9 @@ Takes a tree (Node), adds all the CA's from the entire tree into the internal re
 - `nodes::Array{Dict{String,Any}}`: an array of nodes.
 - `node_num::Int64`: the current node number.
 - `complex::Bool=true`: indicates whether complex rules should be calculated
+- `protein::Bool=false`: indicates whether dataset is a protein (or nucleotide)
 """
-function add_nodes!(tree::Node,sPu::Array{Dict{String,Any}},sPr::Array{Dict{String,Any}},cPu::Array{Dict{String,Any}},cPr::Array{Dict{String,Any}},taxa_labels::Dict{String,String},character_labels::Dict{String,String},nodes::Array{Dict{String,Any}},node_num::Int64;complex::Bool=true)
+function add_nodes!(tree::Node,sPu::Array{Dict{String,Any}},sPr::Array{Dict{String,Any}},cPu::Array{Dict{String,Any}},cPr::Array{Dict{String,Any}},taxa_labels::Dict{String,String},character_labels::Dict{String,String},nodes::Array{Dict{String,Any}},node_num::Int64;complex::Bool=true,protein::Bool=false)
 
     # Iterate through each group at a node
     for (group_idx, taxa) in enumerate(get_group_taxa_at_node(nodes, node_num))
@@ -309,14 +310,14 @@ function add_nodes!(tree::Node,sPu::Array{Dict{String,Any}},sPr::Array{Dict{Stri
         # Get descendent's CA's and recur on descendent to add next layer to tree
         if num_group > 1
             new_node_num = nodes[node_num]["Descendents"][group_idx]
-            new_sPu, new_sPr = get_sPu_and_sPr(nodes, new_node_num, taxa_labels, character_labels)
+            new_sPu, new_sPr = get_sPu_and_sPr(nodes, new_node_num, taxa_labels, character_labels, protein=protein)
             if complex
                 new_cPu, new_cPr = get_cPu_and_cPr(nodes, new_node_num, taxa_labels, character_labels, new_sPu, new_sPr)
             else
                 new_cPu, new_cPr = cPu, cPr
             end
             #print("$node_num \n")
-            add_nodes!(tree.children[group_idx],new_sPu,new_sPr,new_cPu,new_cPr,taxa_labels,character_labels,nodes,new_node_num,complex=complex)
+            add_nodes!(tree.children[group_idx],new_sPu,new_sPr,new_cPu,new_cPr,taxa_labels,character_labels,nodes,new_node_num,complex=complex,protein=protein)
         end
     end
 end

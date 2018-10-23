@@ -219,7 +219,7 @@ Gets the hit from blastn that has the most sequence coverage with no gaps compar
 function get_best_hit(results::Array{BioTools.BLAST.BLASTResult,1}, query::String, character_labels::Dict{String,String},  character_labels_no_gaps::Dict{String,String})
 
     # Initialize varibales
-    error = Array{Int,1}()
+    error = Array{Int,1}(undef, 0)
 
     # Iterate through each result
     for result in results
@@ -278,7 +278,11 @@ function add_blanks(query_path::String, db_path::String, character_labels::Dict{
     end
 
     # Get the results from blastn
-    results = blastn(query_path, db_path, ["-task", "blastn", "-max_target_seqs", 10], db=true)
+    if db_path == "/Users/JasonKatz/Desktop/BCBI/CAOS_package/test/HPV/test_20/char_labels.fasta"
+        results = blastp(query_path, db_path, ["-task", "blastp", "-max_target_seqs", 10], db=true)
+    else
+        results = blastn(query_path, db_path, ["-task", "blastn", "-max_target_seqs", 10], db=true)
+    end
 
     # Extract the best result
     try

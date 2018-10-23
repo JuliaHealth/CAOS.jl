@@ -87,7 +87,7 @@ function find_sequence(tree::Node, taxa_label::String)
             subtree = find_sequence(child, taxa_label)
 
             # Once we find the taxa label, return the subtree
-            if isa(subtree, Node)
+            if typeof(subtree) == Node
                 return subtree
             end
         end
@@ -107,7 +107,7 @@ the subtree containing the input taxa).
 function get_neighbors(tree::Node, taxa_label::String)
 
     # Initialize variables
-    neighbors = Array{String,1}()
+    neighbors = Array{String,1}(undef, 0)
 
     # Iterate over each child in the tree
     for child in tree.children
