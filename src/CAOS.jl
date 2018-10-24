@@ -17,7 +17,8 @@ export generate_caos_rules,
        get_max_depth,
        find_sequence,
        get_sPu_and_sPr,
-       get_cPu_and_cPr
+       get_cPu_and_cPr,
+       get_group_taxa_at_node
 
 include("caos_functions.jl")
 include("tree_functions.jl")
