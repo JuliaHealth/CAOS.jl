@@ -19,7 +19,8 @@ export generate_caos_rules,
        get_sPu_and_sPr,
        get_cPu_and_cPr,
        get_group_taxa_at_node,
-       get_group_combos
+       get_group_combos,
+       classification
 
 include("caos_functions.jl")
 include("tree_functions.jl")
