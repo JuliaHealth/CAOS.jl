@@ -14,7 +14,7 @@ using Documenter, CAOS
 #     end
 # end
 
-makedocs()
+makedocs(sitename="CAOS Documentation")
 
 deploydocs(
     deps   = Deps.pip("mkdocs==0.17.5", "mkdocs-material==2.9.4"),
