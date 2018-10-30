@@ -43,17 +43,17 @@ An example sequence file is provided in the `test/data` folder : `Example_Sequen
 
 #### Functions
 
-```
+```julia
 generate_caos_rules("test/data/S10593.nex", "test/data")
 ```
 This will generate your CAOS rules for the tree in the `S10593.nex` NEXUS file and place all output files from rule generation in the `test/data` directory.
 
-```
+```julia
 tree, character_labels, taxa_labels = load_tree("test/data")
 ```
 This will load the internal representation of the tree and CAOS rules from the files output during rule generation in the `test/data` directory.
 
-```
+```julia
 classification = classify_new_sequence(tree, character_labels, taxa_labels, "test/data/Example_Sequence.txt", "test/data")
 ```
 This will return the classification result, either a string with the classification label or a Node object (under classifiction).
