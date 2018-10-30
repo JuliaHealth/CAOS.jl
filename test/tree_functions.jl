@@ -61,6 +61,11 @@ using Tokenize
         @test join(tree_tokens) == "((apple),((tomatoe),potatoe)));"
         @test !occursin("pinapple", join(tree_tokens))
         @test !occursin("pear", join(tree_tokens))
+
+        tree = "(,(apple,pinapple,pear),((tomatoe,pepper),potatoe)));"
+        tree_tokens = [untokenize(token) for token in collect(tokenize(tree))]
+        remove_from_tree!(tree_tokens,["pinapple", "pear"])
+        @test !occursin("pear", join(tree_tokens))
     end
 
     @testset "get_nodes" begin
