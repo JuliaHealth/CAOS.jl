@@ -274,7 +274,7 @@ function downsample_taxa(taxa::Array{String}, perc_keep::Float64)
 end
 
 """
-    get_descendents(tree::Node)
+    ndents(tree::Node)
 
 Gets descendents of a Node (tree or subtree).
 

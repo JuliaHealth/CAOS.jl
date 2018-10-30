@@ -20,7 +20,10 @@ export generate_caos_rules,
        get_cPu_and_cPr,
        get_group_taxa_at_node,
        get_group_combos,
-       classification
+       classification,
+       get_neighbors,
+       get_first_taxa_from_tree,
+       get_descendents
 
 include("caos_functions.jl")
 include("tree_functions.jl")

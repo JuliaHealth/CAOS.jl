@@ -1,4 +1,5 @@
 @testset "utils" begin
+    tree, character_labels, taxa_labels = load_tree("data/output")
 
     @testset "remove_blanks" begin
         d = Dict("a" => "-", "b" => "2")
@@ -16,4 +17,26 @@
         @test typeof(tree_out[1]) == CAOS.Node
     end
 
+    @testset "find_sequence" begin
+        result = find_sequence(tree, "Tubificoides_diazi_CE3411")
+        @test typeof(result) == CAOS.Node
+    end
+
+    @testset "get_neighbors" begin
+        neighbors = get_neighbors(tree, "Tubificoides_diazi_CE3411")
+
+        @test length(neighbors) == 61
+        @test neighbors[1:3] == ["Tubificoides_insularis_CE3417", "Tubificoides_insularis_I_CE3424", "Tubificoides_insularis_II_CE4438"]
+        @test neighbors[58:61] ==  ["Tubificoides_heterochaetus_CE2266", "Tubificoides_heterochaetus_CE2447", "Tubificoides_heterochaetus_CE2260", "Tubificoides_insularis_CE3418"]
+    end
+
+    @testset "get_first_taxa_from_tree" begin
+        #println(get_first_taxa_from_tree(tree))
+        # needs to fix fefn
+    end
+
+    @testset "get_descendents" begin
+        desc = get_descendents(tree)
+        @test desc[1:3] == ["Tubificoides_insularis_CE3417", "Tubificoides_insularis_I_CE3424", "Tubificoides_insularis_II_CE4438"]
+    end
 end
