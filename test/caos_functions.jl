@@ -25,4 +25,10 @@
         @test typeof(cPu) == Array{Dict{String,Any},1}
     end
 
+    @testset "get_group_combos" begin
+        group_taxa = get_group_taxa_at_node(nodes, node_num)
+        group_combos = get_group_combos(group_taxa)
+        @test group_combos[2]["Non_group"] == ["2", "3"]
+    end
+
 end
