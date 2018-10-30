@@ -23,7 +23,10 @@ export generate_caos_rules,
        classification,
        get_neighbors,
        get_first_taxa_from_tree,
-       get_descendents
+       get_descendents,
+       downsample_taxa,
+       get_adjusted_start,
+       get_all_neighbors
 
 include("caos_functions.jl")
 include("tree_functions.jl")
