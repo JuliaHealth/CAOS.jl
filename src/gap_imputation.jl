@@ -248,96 +248,96 @@ function get_best_hit(results::Array{BioTools.BLAST.BLASTResult,1}, query::Strin
     # Return the reuslt which minimizes the number of characters lost from the new alignment
     return results[argmin(error)]
 end
-
-"""
-    add_blanks(query_path::String, db_path::String, character_labels::Dict{String,String},
-    character_labels_no_gaps::Dict{String,String} ; return_blast::Bool=false)
-
-Adds blanks to an input sequence given a database.
-
-# Arguments
-- `query_path::String`: path to the query file.
-- `db_path::String`: path to the blast database.
-- `character_labels::Dict{String,String}`: a mapping of the character labels to the corresponding sequences.
-- `character_labels_no_gaps::Dict{String,String}`: character labels with gaps removed from sequences.
-- `return_blast::Bool=false`: whether to return blast results.
-"""
-function add_blanks(query_path::String, db_path::String, character_labels::Dict{String,String}, character_labels_no_gaps::Dict{String,String} ; return_blast::Bool=false)
-
-    # Initialize
-    best_result = 0
-    orig_subj_start = 0
-
-    # Read in the query sequence from file
-    query = ""
-    for line in readlines(query_path)
-        if occursin(">", line)
-            continue
-        end
-        query = query * line
-    end
-
-    # Get the results from blastn
-    if db_path == "/Users/JasonKatz/Desktop/BCBI/CAOS_package/test/HPV/test_20/char_labels.fasta"
-        results = blastp(query_path, db_path, ["-task", "blastp", "-max_target_seqs", 10], db=true)
-    else
-        results = blastn(query_path, db_path, ["-task", "blastn", "-max_target_seqs", 10], db=true)
-    end
-
-    # Extract the best result
-    try
-        best_result = get_best_hit(results, query, character_labels, character_labels_no_gaps)
-    catch
-        if return_blast
-            return "Error",["Error"]
-        else
-            return "Error"
-        end
-    end
-
-    # Get all hitnames
-    hitnames = [result.hitname for result in results]
-
-    # Extract the subject as the top hit
-    subject = character_labels[best_result.hitname]
-
-    subject_no_gaps = character_labels_no_gaps[best_result.hitname]
-
-    # Convert the best hit to a string and remove gaps that blast added
-    best_hit = replace(convert(String, best_result.hit), "-" => "")
-
-    # Get the starting position of the matched subject
-    try
-        orig_subj_start = match(Regex(best_hit), subject_no_gaps).offset
-    catch
-        if return_blast
-            return "Error",["Error"]
-        else
-            return "Error"
-        end
-    end
-
-    subj_start = get_adjusted_start(orig_subj_start, subject)
-
-    # Convert the best hit to a string and remove gaps that blast added
-    blast_alignment = replace(convert(String, best_result.alignment.seq), "-" => "")
-
-    # Get the starting position of the query
-    query_start = match(Regex(blast_alignment), query).offset
-
-    # Get the fronts and backs of the subject and query
-    subject_front = subject[1:subj_start-1]
-    query_front = query[1:query_start-1]
-    subject_back = subject[subj_start:end]
-    query_back = query[query_start:end]
-
-    # Return the query sequence with blanks added to the front and back
-    new_seq = add_blanks_to_front(subject_front, query_front, "", subj_start-1, query_start-1, length(replace(subject_front, "-" => "")), hitnames, 1, character_labels) *
-    add_blanks_to_back(subject_back, query_back, "", length(subject_back), length(query_back), length(replace(subject_back, "-" => "")), hitnames, 1, character_labels)
-
-    if return_blast
-        return new_seq, hitnames
-    else
-        return new_seq
-    end
-end
+#
+# """
+#     add_blanks(query_path::String, db_path::String, character_labels::Dict{String,String},
+#     character_labels_no_gaps::Dict{String,String} ; return_blast::Bool=false)
+#
+# Adds blanks to an input sequence given a database.
+#
+# # Arguments
+# - `query_path::String`: path to the query file.
+# - `db_path::String`: path to the blast database.
+# - `character_labels::Dict{String,String}`: a mapping of the character labels to the corresponding sequences.
+# - `character_labels_no_gaps::Dict{String,String}`: character labels with gaps removed from sequences.
+# - `return_blast::Bool=false`: whether to return blast results.
+# """
+# function add_blanks(query_path::String, db_path::String, character_labels::Dict{String,String}, character_labels_no_gaps::Dict{String,String} ; return_blast::Bool=false)
+#
+#     # Initialize
+#     best_result = 0
+#     orig_subj_start = 0
+#
+#     # Read in the query sequence from file
+#     query = ""
+#     for line in readlines(query_path)
+#         if occursin(">", line)
+#             continue
+#         end
+#         query = query * line
+#     end
+#
+#     # Get the results from blastn
+#     if db_path == "/Users/JasonKatz/Desktop/BCBI/CAOS_package/test/HPV/test_20/char_labels.fasta"
+#         results = blastp(query_path, db_path, ["-task", "blastp", "-max_target_seqs", 10], db=true)
+#     else
+#         results = blastn(query_path, db_path, ["-task", "blastn", "-max_target_seqs", 10], db=true)
+#     end
+#
+#     # Extract the best result
+#     try
+#         best_result = get_best_hit(results, query, character_labels, character_labels_no_gaps)
+#     catch
+#         if return_blast
+#             return "Error",["Error"]
+#         else
+#             return "Error"
+#         end
+#     end
+#
+#     # Get all hitnames
+#     hitnames = [result.hitname for result in results]
+#
+#     # Extract the subject as the top hit
+#     subject = character_labels[best_result.hitname]
+#
+#     subject_no_gaps = character_labels_no_gaps[best_result.hitname]
+#
+#     # Convert the best hit to a string and remove gaps that blast added
+#     best_hit = replace(convert(String, best_result.hit), "-" => "")
+#
+#     # Get the starting position of the matched subject
+#     try
+#         orig_subj_start = match(Regex(best_hit), subject_no_gaps).offset
+#     catch
+#         if return_blast
+#             return "Error",["Error"]
+#         else
+#             return "Error"
+#         end
+#     end
+#
+#     subj_start = get_adjusted_start(orig_subj_start, subject)
+#
+#     # Convert the best hit to a string and remove gaps that blast added
+#     blast_alignment = replace(convert(String, best_result.alignment.seq), "-" => "")
+#
+#     # Get the starting position of the query
+#     query_start = match(Regex(blast_alignment), query).offset
+#
+#     # Get the fronts and backs of the subject and query
+#     subject_front = subject[1:subj_start-1]
+#     query_front = query[1:query_start-1]
+#     subject_back = subject[subj_start:end]
+#     query_back = query[query_start:end]
+#
+#     # Return the query sequence with blanks added to the front and back
+#     new_seq = add_blanks_to_front(subject_front, query_front, "", subj_start-1, query_start-1, length(replace(subject_front, "-" => "")), hitnames, 1, character_labels) *
+#     add_blanks_to_back(subject_back, query_back, "", length(subject_back), length(query_back), length(replace(subject_back, "-" => "")), hitnames, 1, character_labels)
+#
+#     if return_blast
+#         return new_seq, hitnames
+#     else
+#         return new_seq
+#     end
+# end
