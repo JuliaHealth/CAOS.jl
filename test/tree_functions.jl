@@ -45,7 +45,7 @@ using Tokenize
 
 
     @testset "remove_from_tree" begin
-        tree = "((1,2,3),((4,5),6)));"
+        tree = "((1,2,3),((4,5),6));"
         tree_tokens = [untokenize(token) for token in collect(tokenize(tree))]
         remove_from_tree!(tree_tokens,["1"])
 
@@ -66,6 +66,14 @@ using Tokenize
         tree_tokens = [untokenize(token) for token in collect(tokenize(tree))]
         remove_from_tree!(tree_tokens,["pinapple", "pear"])
         @test !occursin("pear", join(tree_tokens))
+
+        tree = "((1,2,3),(a),((4,5),6));"
+        tree_tokens = [untokenize(token) for token in collect(tokenize(tree))]
+        remove_from_tree!(tree_tokens,["a"])
+
+        @test join(tree_tokens) == "((1,2,3),((4,5),6));"
+        @test !occursin("a", join(tree_tokens))
+
     end
 
     @testset "get_nodes" begin
