@@ -71,7 +71,7 @@ Gets all the sPu and sPr for the entire character sequence at a specific node.
 - `taxa_labels::Dict{String,String}`: a mapping of the taxa labels to the character labels.
 - `character_labels::Dict{String,String}`: a mapping of the character labels to the corresponding sequences.
 """
-function get_sPu_and_sPr(nodes::Array{Dict{String,Any}}, node_num::Int64, taxa_labels::Dict{String,String}, character_labels::Dict{String,String} ; protein=false)
+function get_sPu_and_sPr(nodes::Array{Dict{String,Any}}, node_num::Int64, taxa_labels::Dict{String,String}, character_labels::Dict{String,String}; protein::Bool=false)
 
     # Initialize variables
     group_taxa = get_group_taxa_at_node(nodes, node_num)
@@ -199,14 +199,14 @@ function get_cPu_and_cPr(nodes::Array{Dict{String,Any}}, node_num::Int64, taxa_l
     for dict in sPr
         append!(exclude, [key for key in keys(dict["sPr"])])
     end
-    all_idx = range(1, length(character_labels[taxa_labels["1"]]))
+    all_idx = range(1, length=length(character_labels[taxa_labels["1"]]))
     curr_idx = setdiff(all_idx, exclude)
 
     # Initialize variables
     group_taxa = get_group_taxa_at_node(nodes, node_num)
     group_combos = get_group_combos(group_taxa)
-    cPu = Array{Dict{String,Any}}(0)
-    cPr = Array{Dict{String,Any}}(0)
+    cPu = Array{Dict{String,Any}}(undef, 0)
+    cPr = Array{Dict{String,Any}}(undef, 0)
     num_char = length(character_labels[taxa_labels["1"]])
     letter_transformations = Dict{Char,Vector{Char}}('A'=>['A'], 'T'=>['T'], 'C'=>['C'], 'G'=>['G'], 'U'=>['U'], 'R'=>['A','G'], 'Y'=>['C','T'], 'S'=>['G','C'], 'W'=>['A','T'], 'K'=>['G','T'], 'M'=>['A','C'], 'B'=>['C','G','T'], 'D'=>['A','G','T'], 'H'=>['A','C','T'], 'V'=>['A','C','G'], 'N'=>['A','T','C','G'], '-'=>['-'])
 
@@ -273,7 +273,7 @@ function get_cPu_and_cPr(nodes::Array{Dict{String,Any}}, node_num::Int64, taxa_l
                                 cPu[group_idx]["cPu"][(idx1,idx2)] = ((letter1,letter2), occurances)
                             else
                                 if !haskey(cPr[group_idx]["cPr"], (idx1,idx2))
-                                    cPr[group_idx]["cPr"][(idx1,idx2)] = Array{Tuple{Tuple{Char,Char},Int}}(0)
+                                    cPr[group_idx]["cPr"][(idx1,idx2)] = Array{Tuple{Tuple{Char,Char},Int}}(undef, 0)
                                 end
                                 push!(cPr[group_idx]["cPr"][(idx1,idx2)], ((letter1,letter2), occurances))
                             end

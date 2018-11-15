@@ -262,7 +262,7 @@ Adds blanks to an input sequence given a database.
 - `character_labels_no_gaps::Dict{String,String}`: character labels with gaps removed from sequences.
 - `return_blast::Bool=false`: whether to return blast results.
 """
-function add_blanks(query_path::String, db_path::String, character_labels::Dict{String,String}, character_labels_no_gaps::Dict{String,String} ; return_blast::Bool=false)
+function add_blanks(query_path::String, db_path::String, character_labels::Dict{String,String}, character_labels_no_gaps::Dict{String,String}; protein::Bool=false, return_blast::Bool=false)
 
     # Initialize
     best_result = 0
@@ -278,7 +278,7 @@ function add_blanks(query_path::String, db_path::String, character_labels::Dict{
     end
 
     # Get the results from blastn
-    if db_path == "/Users/JasonKatz/Desktop/BCBI/CAOS_package/test/HPV/test_20/char_labels.fasta"
+    if protein
         results = blastp(query_path, db_path, ["-task", "blastp", "-max_target_seqs", 10], db=true)
     else
         results = blastn(query_path, db_path, ["-task", "blastn", "-max_target_seqs", 10], db=true)

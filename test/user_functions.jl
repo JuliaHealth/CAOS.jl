@@ -12,8 +12,7 @@
 
     @testset "classify_new_sequence" begin
         tree, character_labels, taxa_labels = load_tree("data/output")
-        classification = classify_new_sequence(tree, character_labels, taxa_labels, "data/Example_Sequence.txt", "data/output")
-        println(classification)
+        classification = classify_new_sequence(tree, character_labels, taxa_labels, "data/dna_seq.txt", "data/output")
         @test typeof(classification) == String
     end
 

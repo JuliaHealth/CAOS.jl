@@ -27,7 +27,7 @@ function generate_caos_rules(tree_file_path::String, output_directory::String; p
 
     # Get CA's for tree
     tree = Node([])
-    add_nodes!(tree,sPu,sPr,cPu,cPr,taxa_labels,character_labels,nodes,1,complex=false)
+    add_nodes!(tree,sPu,sPr,cPu,cPr,taxa_labels,character_labels,nodes,1,complex=false, protein=protein)
 
     # Save tree to json
     tree_data = JSON.json(tree)
@@ -42,7 +42,11 @@ function generate_caos_rules(tree_file_path::String, output_directory::String; p
     writefasta("$output_directory/char_labels.fasta", character_labels_no_gaps)
 
     # Create the blast database
+    if protein
+        run(`makeblastdb -in $output_directory/char_labels.fasta -dbtype prot`)
+    else
     run(`makeblastdb -in $output_directory/char_labels.fasta -dbtype nucl`)
+    end
 
     # Save character and taxa labels
     character_data = JSON.json(character_labels)
@@ -87,12 +91,12 @@ function classify_new_sequence(tree::Node, character_labels::Dict{String,String}
     catch
     end
 
-    character_labels_no_gaps = remove_blanks(character_labels)
+    character_labels_no_gaps = remove_blanks(character_labels, change_to_N=false)
 
     # Get the new sequence after imputing blanks
-    new_seq, blast_results = add_blanks("$sequence_file_path", "$output_directory/char_labels.fasta", character_labels, character_labels_no_gaps, return_blast=true, protein=protein)
-
-    classification = classify_sequence(new_seq, tree, all_CA_weights[1], all_CA_weights, occurrence_weighting, 1, tiebreaker, blast_results=blast_results, combo_classification=combo_classification)
+    new_seq = add_blanks("$sequence_file_path", "$output_directory/char_labels.fasta", character_labels, character_labels_no_gaps, protein=protein)
+    classification = classify_sequence(new_seq, tree, all_CA_weights[1], all_CA_weights, occurrence_weighting, 1,
+                                       tiebreaker, combo_classification=combo_classification, protein=protein)
 
     return classification
 
