@@ -71,7 +71,7 @@ Gets all the sPu and sPr for the entire character sequence at a specific node.
 - `taxa_labels::Dict{String,String}`: a mapping of the taxa labels to the character labels.
 - `character_labels::Dict{String,String}`: a mapping of the character labels to the corresponding sequences.
 """
-function get_sPu_and_sPr(nodes::Array{Dict{String,Any}}, node_num::Int64, taxa_labels::Dict{String,String}, character_labels::Dict{String,String}; protein=false)
+function get_sPu_and_sPr(nodes::Array{Dict{String,Any}}, node_num::Int64, taxa_labels::Dict{String,String}, character_labels::Dict{String,String}; protein::Bool=false)
 
     # Initialize variables
     group_taxa = get_group_taxa_at_node(nodes, node_num)

@@ -9,7 +9,7 @@ Counts the number of CA's matched by a sequence (only support for simple rules).
 - `CA_weights::Dict{String,Int64}`: weights to use for CA counts.
 - `occurrence_weighting::Bool`: whether to use occurrence weighting during counting.
 """
-function CA_matches(sequence::String, CAs::Vector{Rule}, CA_weights::Dict{String,Int64}, occurrence_weighting::Bool ; protein=false)
+function CA_matches(sequence::String, CAs::Vector{Rule}, CA_weights::Dict{String,Int64}, occurrence_weighting::Bool ; protein::Bool=false)
 
     letter_transformations = Dict{Char,Vector{Char}}('A'=>['A'],
                                                      'T'=>['T'],
@@ -147,7 +147,7 @@ function classify_sequence(sequence::String, tree::Node, CA_weights::Dict{String
 
         child_CA_score = Array{Int,1}()
         for child in tree.children
-            push!(child_CA_score, CA_matches(sequence, child.CAs, CA_weights, occurrence_weighting))
+            push!(child_CA_score, CA_matches(sequence, child.CAs, CA_weights, occurrence_weighting, protein=protein))
         end
 
         max_child_idx = argmax(child_CA_score)
