@@ -1,7 +1,7 @@
 *.jl.cov
 *.jl.*.cov
 *.jl.mem
-test/data/output
+test/data/output*
 build
 test/HPV
 Manifest.toml
