@@ -26,7 +26,11 @@ export generate_caos_rules,
        get_descendents,
        downsample_taxa,
        get_adjusted_start,
-       get_all_neighbors
+       get_all_neighbors,
+       add_nodes!,
+       add_blanks,
+       convert_to_struct,
+       classify_sequence
 
 include("caos_functions.jl")
 include("tree_functions.jl")

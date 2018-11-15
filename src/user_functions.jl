@@ -8,7 +8,7 @@ Takes a Nexus file and generates all the CAOS rules for the tree.
 - `tree_file_path::String`: path to the Nexus file.
 - `output_directory::String`: path to the output directory.
 """
-function generate_caos_rules(tree_file_path::String, output_directory::String; protein::Bool=false)
+function generate_caos_rules(tree_file_path::String, output_directory::String)
 
     # Create directory
     try
@@ -20,7 +20,7 @@ function generate_caos_rules(tree_file_path::String, output_directory::String; p
     nodes, taxa_labels, character_labels, _ = parse_tree(tree_file_path)
 
     # Initialize variables for constructing tree
-    sPu, sPr = get_sPu_and_sPr(nodes, 1, taxa_labels, character_labels; protein=protein)
+    sPu, sPr = get_sPu_and_sPr(nodes, 1, taxa_labels, character_labels)
     cPu = Array{Dict{String,Any}}(undef, 0)
     cPr = Array{Dict{String,Any}}(undef, 0)
     #cPu,cPr = get_cPu_and_cPr(nodes,1,taxa_labels,character_labels,sPu,sPr)
