@@ -8,7 +8,7 @@ Takes a Nexus file and generates all the CAOS rules for the tree.
 - `tree_file_path::String`: path to the Nexus file.
 - `output_directory::String`: path to the output directory.
 """
-function generate_caos_rules(tree_file_path::String, output_directory::String)
+function generate_caos_rules(tree_file_path::String, output_directory::String; protein::Bool=false)
 
     # Create directory
     try
@@ -20,7 +20,7 @@ function generate_caos_rules(tree_file_path::String, output_directory::String)
     nodes, taxa_labels, character_labels, _ = parse_tree(tree_file_path)
 
     # Initialize variables for constructing tree
-    sPu, sPr = get_sPu_and_sPr(nodes, 1, taxa_labels, character_labels)
+    sPu, sPr = get_sPu_and_sPr(nodes, 1, taxa_labels, character_labels; protein=protein)
     cPu = Array{Dict{String,Any}}(undef, 0)
     cPr = Array{Dict{String,Any}}(undef, 0)
     #cPu,cPr = get_cPu_and_cPr(nodes,1,taxa_labels,character_labels,sPu,sPr)
@@ -79,7 +79,7 @@ Takes a tree (Node) and a sequence, and classifies the new sequence using the CA
 """
 function classify_new_sequence(tree::Node, character_labels::Dict{String,String}, taxa_labels::Dict{String,String},
     sequence_file_path::String, output_directory::String ; all_CA_weights::Dict{Int64,Dict{String,Int64}}=Dict(1=>Dict("sPu"=>1,"sPr"=>1,"cPu"=>1,"cPr"=>1)),
-    occurrence_weighting::Bool=false, tiebreaker::Vector{Dict{String,Int64}}=[Dict{String,Int64}()], combo_classification::Bool=false)
+    occurrence_weighting::Bool=false, tiebreaker::Vector{Dict{String,Int64}}=[Dict{String,Int64}()], combo_classification::Bool=false, protein::Bool=false)
 
     # Create directory
     try
@@ -90,7 +90,7 @@ function classify_new_sequence(tree::Node, character_labels::Dict{String,String}
     character_labels_no_gaps = remove_blanks(character_labels)
 
     # Get the new sequence after imputing blanks
-    new_seq, blast_results = add_blanks("$sequence_file_path", "$output_directory/char_labels.fasta", character_labels, character_labels_no_gaps, return_blast=true)
+    new_seq, blast_results = add_blanks("$sequence_file_path", "$output_directory/char_labels.fasta", character_labels, character_labels_no_gaps, return_blast=true, protein=protein)
 
     classification = classify_sequence(new_seq, tree, all_CA_weights[1], all_CA_weights, occurrence_weighting, 1, tiebreaker, blast_results=blast_results, combo_classification=combo_classification)
 
