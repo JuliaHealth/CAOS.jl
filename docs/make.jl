@@ -1,24 +1,46 @@
 using Documenter, CAOS
-# using Literate
 
-# compile all examples in BioMedQuery/examples/literate_src into markdown and jupyter notebooks for documentation
-# for (root, dirs, files) in walkdir("examples/literate_src")
-#     for file in files
-#         Literate.notebook(joinpath(root,file), joinpath(@__DIR__, "src", "notebooks"))
-#     end
-# end
-#
-# for (root, dirs, files) in walkdir("examples/literate_src")
-#     for file in files
-#         Literate.markdown(joinpath(root,file), joinpath(@__DIR__, "src", "examples"))
-#     end
-# end
+# auth = GitHub.authenticate(ENV["GITHUB_AUTH"])
 
-makedocs(sitename="CAOS Documentation")
+# make assets dir if doesn't exist
+assets_dir = joinpath(@__DIR__,"src","assets")
+if !isdir(assets_dir)
+    mkdir(assets_dir)
+end
+
+base_url = "https://raw.githubusercontent.com/bcbi/code_style_guide/master/assets/"
+
+# get/replace favicon
+favicon_url = base_url*"favicon.ico"
+favicon_path = joinpath(assets_dir,"favicon.ico")
+run(`curl -g -L -f -o $favicon_path $favicon_url`)
+
+# get/replace css
+css_url = base_url*"bcbi.css"
+css_path = joinpath(assets_dir,"bcbi.css")
+run(`curl -g -L -f -o $css_path $css_url`)
+
+# get/replace logo
+logo_url = base_url*"bcbi-white-v.png"
+logo_path = joinpath(assets_dir,"logo.png")
+run(`curl -g -L -f -o $logo_path $logo_url`)
+
+makedocs(
+    modules = [ DeIdentification ],
+    assets = [
+        "assets/favicon.ico",
+        "assets/bcbi.css",
+        "assets/logo.png"
+        ],
+    sitename = "CAOS.jl",
+    debug = true,
+    pages = [
+        "Home" => "index.md",
+        "Guide" => "usage.md",
+        "API" => "documentation.md"
+        ]
+    )
 
 deploydocs(
-    deps   = Deps.pip("mkdocs==0.17.5", "mkdocs-material==2.9.4"),
-    repo = "github.com/bcbi/CAOS.jl.git",
-    julia  = "0.7",
-    osname = "linux"
+    repo = "github.com/bcbi/CAOS.jl.git"
 )
