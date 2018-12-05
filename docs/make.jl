@@ -1,7 +1,5 @@
 using Documenter, CAOS
 
-# auth = GitHub.authenticate(ENV["GITHUB_AUTH"])
-
 # make assets dir if doesn't exist
 assets_dir = joinpath(@__DIR__,"src","assets")
 if !isdir(assets_dir)
@@ -26,7 +24,7 @@ logo_path = joinpath(assets_dir,"logo.png")
 run(`curl -g -L -f -o $logo_path $logo_url`)
 
 makedocs(
-    modules = [ DeIdentification ],
+    modules = [ CAOS ],
     assets = [
         "assets/favicon.ico",
         "assets/bcbi.css",
