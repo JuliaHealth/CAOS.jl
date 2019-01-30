@@ -47,6 +47,6 @@ matrix:
       script:
         - git config --global user.name "semantic-release (via TravisCI)"
         - git config --global user.email "semantic-release@travis"
-        - semantic-release --minor publish
+        - semantic-release publish
       after_script: skip
       after_success: skip
