@@ -8,7 +8,6 @@ matrix:
         - linux
         - osx
       julia:
-        - 1.0
         - 1.1
       notifications:
         email: false
@@ -48,6 +47,6 @@ matrix:
       script:
         - git config --global user.name "semantic-release (via TravisCI)"
         - git config --global user.email "semantic-release@travis"
-        - semantic-release publish
+        - semantic-release --minor publish
       after_script: skip
       after_success: skip
