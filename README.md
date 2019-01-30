@@ -28,9 +28,48 @@ using Pkg
 Pkg.clone("https://github.com/bcbi/CAOS.jl")
 ```
 
+## Contributing
+
+Contributions consistent with the style and quality of existing code are
+welcome. Be sure to follow the guidelines below.
+
+Check the issues page of this repository for available work.
+
+### Committing
+
+
+This project uses [commitizen](https://pypi.org/project/commitizen/)
+to ensure that commit messages remain well-formatted and consistent
+across different contributors.
+
+Before committing for the first time, install commitizen and read
+[Conventional
+Commits](https://www.conventionalcommits.org/en/v1.0.0-beta.2/).
+
+```bash
+pip install commitizen
+```
+
+To start work on a new change, pull the latest `develop` and create a
+new *topic branch* (e.g. feature-resume-model`,
+`chore-test-update`, `bugfix-bad-bug`).
+
+```bash
+git add .
+```
+
+To commit, run the following command (instead of ``git commit``) and
+follow the directions:
+
+
+```bash
+cz commit
+```
+
+
 ## Project Status
 
-The package is tested against the current Julia `0.7` and Julia `1.0` release on OS X, Linux, and Windows.
+The package is tested against the current Julia `1.0` and Julia `1.1` release on OS X and Linux.
 
 ## Contributing and Questions
 
