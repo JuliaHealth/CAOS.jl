@@ -1,4 +1,10 @@
-## Documentation: http://docs.travis-ci.com/user/languages/julia/
+branches:
+    only:
+    - master
+    - staging
+    - trying
+    - /^release\/.*$/ # release branches
+    - /^v[0-9]+\.[0-9]+\.[0-9]+$/ # version tags
 
 matrix:
   include:
@@ -34,19 +40,3 @@ matrix:
       julia: 0.7
       script:
         - julia -e 'import Pkg; Pkg.instantiate(); Pkg.add("Documenter"); include(joinpath("docs", "make.jl"))'
-
-    - stage: semantic release
-      if: branch = master AND type != pull_request
-      language: python
-      os: linux
-      python: 3.6
-      before_script: skip
-      install:
-        - pip install typing
-        - pip install python-semantic-release
-      script:
-        - git config --global user.name "semantic-release (via TravisCI)"
-        - git config --global user.email "semantic-release@travis"
-        - semantic-release publish
-      after_script: skip
-      after_success: skip
